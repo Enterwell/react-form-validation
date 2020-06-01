@@ -12,31 +12,31 @@ Object.defineProperty(exports, "useValidation", {
 Object.defineProperty(exports, "extractValues", {
   enumerable: true,
   get: function get() {
-    return _validationUtils.extractValues;
+    return _formUtils.extractValues;
   }
 });
 Object.defineProperty(exports, "validateFields", {
   enumerable: true,
   get: function get() {
-    return _validationUtils.validateFields;
+    return _formUtils.validateFields;
   }
 });
 Object.defineProperty(exports, "resetFields", {
   enumerable: true,
   get: function get() {
-    return _validationUtils.resetFields;
+    return _formUtils.resetFields;
   }
 });
 Object.defineProperty(exports, "submitForm", {
   enumerable: true,
   get: function get() {
-    return _validationUtils.submitForm;
+    return _formUtils.submitForm;
   }
 });
 Object.defineProperty(exports, "cancelForm", {
   enumerable: true,
   get: function get() {
-    return _validationUtils.cancelForm;
+    return _formUtils.cancelForm;
   }
 });
 Object.defineProperty(exports, "noError", {
@@ -96,6 +96,6 @@ Object.defineProperty(exports, "isNonEmptyArray", {
 
 var _useValidation = require("./useValidation");
 
-var _validationUtils = require("./validationUtils");
+var _formUtils = require("./formUtils");
 
 var _validationFunctions = require("./validationFunctions");
