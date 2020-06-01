@@ -27,6 +27,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 // Default configuration
 var DEFAULT_CONFIG = {
+  receiveEvent: true,
   reversed: false,
   ignoreDirtiness: false
 };
@@ -62,7 +63,8 @@ var useValidation = function useValidation(defaultValue, validationFn, config) {
       dirty = _useState6[0],
       setDirty = _useState6[1];
 
-  var onChange = function onChange(v) {
+  var onChange = function onChange(e) {
+    var v = _config.receiveEvent ? e.target.value : e;
     setValue(v); // Setting dirty flag indicates that value has been changed
 
     if (!_config.ignoreDirtiness && !dirty) {

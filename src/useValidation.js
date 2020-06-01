@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 // Default configuration
 const DEFAULT_CONFIG = {
+    receiveEvent: true,
     reversed: false,
     ignoreDirtiness: false
 }
@@ -29,7 +30,8 @@ export const useValidation = (defaultValue, validationFn, config) => {
     const [error, setError] = useState(false);
     const [dirty, setDirty] = useState(false);
 
-    const onChange = (v) => {
+    const onChange = (e) => {
+        const v = _config.receiveEvent ? e.target.value : e;
         setValue(v);
 
         // Setting dirty flag indicates that value has been changed
