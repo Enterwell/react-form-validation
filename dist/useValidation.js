@@ -104,7 +104,7 @@ var useValidation = function useValidation(defaultValue, validationFn, config) {
 
   return {
     value: value,
-    hasError: error,
+    error: error,
     onChange: onChange,
     onBlur: onBlur,
     validate: validate,
