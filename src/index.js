@@ -7,7 +7,7 @@ export {
     resetFields, 
     submitForm, 
     cancelForm 
-} from './validationUtils';
+} from './formUtils';
 export {
     noError,
     areEqual,
