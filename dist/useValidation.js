@@ -30,13 +30,13 @@ var DEFAULT_CONFIG = {
   reversed: false,
   ignoreDirtiness: false
 };
-/*
+/**
  * Function represents the useValidation hook.
- *
+ * 
  * @param {any} defaultValue Default value
  * @param {function} validationFn Function used for value validation
  * @param {Object} config Hook configuration
- * @return object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
+ * @returns object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
  */
 
 var useValidation = function useValidation(defaultValue, validationFn, config) {
@@ -89,7 +89,7 @@ var useValidation = function useValidation(defaultValue, validationFn, config) {
 
   var validate = function validate(v) {
     // Validates the value and applies the reverse logic if needed
-    var _error = validationFn(v);
+    var _error = !validationFn(v);
 
     _error = _config.reversed ? !_error : _error;
     setError(_error);

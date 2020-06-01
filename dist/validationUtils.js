@@ -23,9 +23,22 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/**
+ * Checks whether some value is function or not.
+ * 
+ * @param {any} f Value that should be checked whether it is function or not
+ * @returns true if value is a function, false otherwise 
+ */
 var isFunction = function isFunction(f) {
   return Object.prototype.toString.call(f) == '[object Function]';
 };
+/**
+ * Extracts the values from form fields' objects.
+ * 
+ * @param {Object.<string, any>} fields Form's fields
+ * @returns object containing form fields' values
+ */
+
 
 var extractValues = function extractValues(fields) {
   return Object.entries(fields).reduce(function (acc, _ref) {
@@ -36,6 +49,13 @@ var extractValues = function extractValues(fields) {
     return _objectSpread(_objectSpread({}, acc), {}, _defineProperty({}, k, v.value));
   }, {});
 };
+/**
+ * Validates all forms' fields.
+ * 
+ * @param {Object.<string, Object>} fields Form's fields
+ * @returns true if there is any error in the form, false otherwise
+ */
+
 
 exports.extractValues = extractValues;
 
@@ -55,6 +75,12 @@ var validateFields = function validateFields(fields) {
     return cur.validate(cur.value) || acc;
   }, false);
 };
+/**
+ * Resets forms' fields to their initial values.
+ * 
+ * @param {Object.<string, Object>} fields Form's fields
+ */
+
 
 exports.validateFields = validateFields;
 
@@ -70,20 +96,33 @@ var resetFields = function resetFields(fields) {
     }
   }); // Validates all fields
 
-  return Object.values(fields).forEach(function (cur) {
+  Object.values(fields).forEach(function (cur) {
     return cur.reset();
   });
 };
+/**
+ * Validates the forms' fields and invokes the provided callback with extracted 
+ * form's values.
+ * 
+ * @param {Object.<string, Object>} fields Form's fields
+ * @param {function} onSubmit On submit callback
+ */
+
 
 exports.resetFields = resetFields;
 
 var submitForm = function submitForm(fields, onSubmit) {
-  console.log(validateFields(fields));
-
   if (!validateFields(fields)) {
     onSubmit(extractValues(fields));
   }
 };
+/**
+ * Resets the forms' fields and invokes the provided callback.
+ * 
+ * @param {Object.<string, Object>} fields Form's fields
+ * @param {function} onCancel On cancel callback
+ */
+
 
 exports.submitForm = submitForm;
 

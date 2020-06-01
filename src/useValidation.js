@@ -6,13 +6,13 @@ const DEFAULT_CONFIG = {
     ignoreDirtiness: false
 }
 
-/*
+/**
  * Function represents the useValidation hook.
- *
+ * 
  * @param {any} defaultValue Default value
  * @param {function} validationFn Function used for value validation
  * @param {Object} config Hook configuration
- * @return object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
+ * @returns object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
  */
 export const useValidation = (defaultValue, validationFn, config) => {
     // Checks whether validation function is really funcion
@@ -57,7 +57,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
 
     const validate = (v) => {        
         // Validates the value and applies the reverse logic if needed
-        let _error = validationFn(v);
+        let _error = !validationFn(v);
         _error = _config.reversed ? !_error : _error;
 
         setError(_error);
