@@ -75,7 +75,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
 
     return {
         value,
-        hasError: error,
+        error,
         onChange,
         onBlur,
         validate,
