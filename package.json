@@ -1,0 +1,42 @@
+{
+    "name": "@enterwell/react-form-validation",
+    "version": "1.0.0",
+    "description": "Form validation functionality for React components",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "TODO: github link"
+    },
+    "author": {
+        "name": "Enterwell",
+        "email": "services@enterwell.net",
+        "url": "https://enterwell.net"
+    },
+    "engines": {
+        "node": ">=8"
+    },
+    "scripts": {
+        "build": "babel src/ -d dist"
+    },
+    "main": "./dist/index.js",
+    "files": [
+        "src",
+        "dist"
+    ],
+    "keywords": [
+        "react",
+        "hooks",
+        "form",
+        "validation"
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/cli": "^7.10.1",
+        "@babel/core": "^7.10.1",
+        "@babel/preset-env": "^7.10.1"
+    },
+    "peerDependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    }
+}
