@@ -1,20 +1,288 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Enterwell's React form validation
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Keeps and validates your form's data. Doesn't mess with your components. Simple and straight to the point.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Features
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+* Keeps form's state and validation results
+* Supports any kind of validation functions
+* Dirty checking
+* Separates data from view
+* Relies on hooks, but can easily be used with class components
+
+
+## Installation
+
+Package can be installed with one of the following commands (depending on whether you prefer `npm` or `yarn`)
+
+```
+$ npm install @enterwell/react-form-validation
+```
+```
+$ yarn add @enterwell/react-form-validation
+```
+
+
+## Usage
+
+2 quick steps to validate any kind of input.
+
+<img src="email-input.gif" /></br>
+
+Step 1: 
+* Define validation function (or use some of predefined) and use it to initialize validation hook
+
+```jsx
+const emailValidation = (value) => /^.+@\S+\.\S+$/.test(value);
+const email = useValidation('jane.doe@acme.me', emailValidation);
+```
+
+Step 2: 
+* Pass the email data to your input 
+
+```jsx
+<>
+    <input
+        className={email.error ? 'error' : 'no-error'}
+        value={email.value}
+        onChange={email.onChange}
+        onBlur={email.onBlur}
+    >
+    {email.error && (
+        <span className="error-message">Incorrect email!</span>
+    )}
+</>
+```
+And thats all! For more advanced examples, click the link below.
+
+
+## API
+### `useValidation(initialValue, validationFn, config?)`
+
+Hook that keeps on form field's data.
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| initialValue | _any_ | yes | Field's initial value |
+| validationFn | _(any) => boolean_ | yes | Function for validating the field's value |
+| config | _{<br>&nbsp;&nbsp;&nbsp;receiveEvent: boolean,<br>&nbsp;&nbsp;&nbsp;reversed: boolean<br>&nbsp;&nbsp;&nbsp;ignoreDirtiness: boolean<br>}_ | no | Additional hook configuration.<br><br><ul><li>`receiveEvent` inidicates whether `onChange` callback will receive whole event or just target's value</li><li>`reversed` indicates whether reversed error logic should be applied (error being `false` when present, instead of `true`)</li><li>`ignoreDirtiness` indicating whether field's dirtiness should be ignored (by default, field is validate on blur, but only if field is dirty ie. if its value has been changed)</li></ul>|
+
+**Returns**
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;onChange: (any) => void<br>&nbsp;&nbsp;&nbsp;onBlur: () => void<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>&nbsp;&nbsp;&nbsp;reset: () => void<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (change's the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li></ul>|
+
+**Usage example** 
+
+```jsx
+import { useValidation, isNonEmptyString } from '@enterwell/react-form-validation';
+
+/* Some code... */
+
+const userFormData = {
+    name: useValidation(name, isNonEmptyString),
+    age: useValidation(age, () => true)
+};
+console.log(userFormData.name) // {value: "Matej", error: false, onChange: ƒ, onBlur: ƒ, validate: ƒ, reset: f}"
+
+```
+___
+
+### `extractValue(fields)`
+
+Util function for extracting values from fields' data objects.
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{  value: any }_ | yes | Form field's data (each field must have `value` property - other properties are not important) |
+
+**Returns**
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _Object_ | Object with fields' names as keys, and their values as values |
+
+
+**Usage example**
+
+```jsx
+import { ..., extractValues } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+const data = extractValues(userFormData);
+console.log(data) // {name: "Matej", age: 10}
+```
+
+### `validateFields(fields)`
+
+Util function for validating values of all fields
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{<br>&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
+
+**Returns**
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _boolean_ | `false` if form data is correct, `true` otherwise |
+
+**Usage example**
+
+```jsx
+import { ..., validateFields } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+const hasError = validateFields(userFormData);
+console.log(hasError) // false
+```
+
+### `resetFields(fields)`
+
+Util function for resetting all fields' data.
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{  reset: () => void }_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
+
+**Usage example**
+
+```jsx
+import { ..., resetFields } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+resetFields(userFormData);
+```
+
+### `submitForm(fields, onSubmit)`
+
+Util function for handling the form submit. Form's fields are first validated. If all values are correct, they are extracted to data object and passed to `onSubmit` callback.
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{<br>&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
+| onSubmit | _(any) => void_ | yes | On submit callback |
+
+**Usage example**
+
+```jsx
+import { ..., submitForm } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+const onSubmit = (data) => fetch("www.some-url.com/post", {
+    method: 'POST',
+    data: JSON.stringify(data)
+});
+submitForm(userFormData, onSubmit);
+```
+
+### `cancelForm(fields, onCancel)`
+
+Util function for handling the form cancel. Form's fields are reset and `onCancel` callback is called.
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{  reset: () => void }_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
+| onCancel | _(any) => void_ | yes | On cancel callback |
+
+**Usage example**
+
+```jsx
+import { ..., cancelForm } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+const onCancel = (data) => alert("Form has been reset");
+cancelForm(userFormData, onCancel);
+```
+
+___
+
+_Unless otherwise stated, each validation function will have the following **params** and **returns**._
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| value | _any_ | no | Form field's value |
+
+**Returns**
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _boolean_ | `true` if field's value is correct, `false` otherwise |
+
+### `noError()`
+
+No error validation. Value of the field with this validation function will always be correct.
+
+### `areEqual(value, other)`
+
+Are values equal validation. Value of the field with this validation function will be correct if it is equal to some other value (e.g. some other field's value).
+
+**Params**
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| value | _any_ | no | Form field's value |
+| other | _any_ | no | Some other value |
+
+**Returns**
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _boolean_ | `true` if field's value is correct, `false` otherwise |
+
+### `isTrue(value)`
+
+Is true validation. Value of the field with this validation function will be correct only if it is `true`.
+
+### `isNotNull(value)`
+
+Is not null validation. Value of the field with this validation function will be correct only if it is not `null`.
+
+### `isNonEmptyString(value)`
+
+Is non-empty string validation. Value of the field with this validation function will be correct if it is not an empty string.
+
+### `isValidNumber(value)`
+
+Is valid number validation. Value of the field with this validation function will be correct if it represents the valid number (as number or as string).
+
+### `isPositiveNumber(value)`
+
+Is positive number validation. Value of the field with this validation function will be correct if it is the positive number.
+
+### `isNegativeNumber(value)`
+
+Is negative number validation. Value of the field with this validation function will be correct if it is the negative number.
+
+### `isNonEmptyArray(value)`
+
+Is non-empty array  validation. Value of the field with this validation function will be correct if it is the non-empty array.
+
+
+## Future plans
+
+We noticed that there are few things which could be added to our package in order to make it more flexible and easy to use. Here is what you can expect in the future:
+
+- additional config which will enable to change when value is validate (e.g. only in `onChange`, in `onBlur` but only if current value is not valid and so on)
+- more validation functions
