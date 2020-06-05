@@ -35,7 +35,7 @@ Step 1:
 
 ```jsx
 const emailValidation = (value) => /^.+@\S+\.\S+$/.test(value);
-const email = useValidation('jane.doe@acme.me', emailValidation);
+const email = useValidation('matej.radovix@enterwell.net', emailValidation);
 ```
 
 Step 2: 
@@ -54,7 +54,7 @@ Step 2:
     )}
 </div>
 ```
-And thats all! For more advanced examples, click the link below.
+And thats all!
 
 
 ## API
