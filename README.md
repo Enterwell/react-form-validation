@@ -41,7 +41,8 @@ const email = useValidation('jane.doe@acme.me', emailValidation);
 Step 2: 
 * Pass the email data to your input 
 
-```html
+```jsx
+
 <div>
     <input
         className={email.error ? 'error' : 'no-error'}
