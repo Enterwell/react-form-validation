@@ -28,7 +28,7 @@ $ yarn add @enterwell/react-form-validation
 
 2 quick steps to validate any kind of input.
 
-<img src="email-input.gif" /></br>
+![GIF](email-input.gif)
 
 Step 1: 
 * Define validation function (or use some of predefined) and use it to initialize validation hook
@@ -42,7 +42,7 @@ Step 2:
 * Pass the email data to your input 
 
 ```jsx
-<>
+<div>
     <input
         className={email.error ? 'error' : 'no-error'}
         value={email.value}
@@ -52,7 +52,7 @@ Step 2:
     {email.error && (
         <span className="error-message">Incorrect email!</span>
     )}
-</>
+</div>
 ```
 And thats all! For more advanced examples, click the link below.
 
