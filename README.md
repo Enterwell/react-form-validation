@@ -42,7 +42,6 @@ Step 2:
 * Pass the email data to your input 
 
 ```jsx
-
 <div>
     <input
         className={email.error ? 'error' : 'no-error'}
