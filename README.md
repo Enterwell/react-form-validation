@@ -28,7 +28,7 @@ $ yarn add @enterwell/react-form-validation
 
 2 quick steps to validate any kind of input.
 
-![GIF](email-input.gif)
+![GIF](email-input.gif?raw=1)
 
 Step 1: 
 * Define validation function (or use some of predefined) and use it to initialize validation hook
