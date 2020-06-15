@@ -1,7 +1,15 @@
-# Enterwell's React form validation
+<h1 align="center">Enterwell's React form validation</h1>
 
-Keeps and validates your form's data. Doesn't mess with your components. Simple and straight to the point.
+<p align="center">
+    Keeps and validates your form's data. Doesn't mess with your components. Simple and straight to the point.
+</p>
 
+<div align="center">
+    
+[![npm version](https://badge.fury.io/js/%40enterwell%2Freact-form-validation.svg)](https://www.npmjs.com/package/@enterwell/react-form-validation)
+![Build](https://github.com/Enterwell/react-form-validation/workflows/Node.js%20Package/badge.svg?branch=master)
+
+</div>
 
 ## Features
 
