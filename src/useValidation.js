@@ -57,14 +57,25 @@ export const useValidation = (defaultValue, validationFn, config) => {
         }        
     };
 
-    const validate = (v) => {        
-        // Validates the value and applies the reverse logic if needed
-        let _error = !validationFn(v);
-        _error = _config.reversed ? !_error : _error;
-
+    const _setValidationResult = (isError) => {
+        // Applies the reverse logic if needed
+        const _error = _config.reversed ? !isError : isError;
         setError(_error);
-
         return _error;
+    }
+
+    const validate = (v) => {        
+        // Validates the value
+        const validationResult = validationFn(v);
+        if (typeof validationResult === "boolean") {
+            return _setValidationResult(!validationResult);
+        }
+        else {
+            return new Promise((resolve, reject) => 
+                Promise.resolve(validationResult)
+                    .then(result => resolve(_setValidationResult(!result)))
+                    .catch(reason => reject(reason)));
+        }        
     };
 
     const reset = () => {

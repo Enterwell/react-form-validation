@@ -1,6 +1,6 @@
 {
     "name": "@enterwell/react-form-validation",
-    "version": "1.0.5",
+    "version": "1.1.0",
     "description": "Form validation functionality for React components",
     "license": "MIT",
     "repository": {
@@ -16,7 +16,9 @@
         "node": ">=8"
     },
     "scripts": {
-        "build": "babel src/ -d dist"
+        "build": "babel src/ -d dist",
+        "test": "cypress run",
+        "test:open": "cypress open"
     },
     "main": "./dist/index.js",
     "files": [
@@ -33,7 +35,16 @@
     "devDependencies": {
         "@babel/cli": "^7.10.1",
         "@babel/core": "^7.10.1",
-        "@babel/preset-env": "^7.10.1"
+        "@babel/preset-env": "^7.10.1",
+        "@babel/preset-react": "^7.12.1",
+        "@cypress/code-coverage": "^3.8.2",
+        "babel-loader": "^8.1.0",
+        "babel-plugin-istanbul": "^6.0.0",
+        "cypress": "^5.5.0",
+        "cypress-react-unit-test": "^4.16.7",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "webpack": "^4.44.2"
     },
     "peerDependencies": {
         "react": "^16.13.1",
