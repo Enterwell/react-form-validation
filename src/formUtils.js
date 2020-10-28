@@ -47,8 +47,8 @@ export const validateFields = (fields) => {
     // Resolve all validation promises and return 
     return new Promise((resolve, reject) => {
         Promise.all(validationResults.map(result => Promise.resolve(result)))
-            .then(results => resolve(results.some(result => result)))
-            .catch((reason) => reject(reason));
+               .then(results => resolve(results.some(result => result)))
+               .catch((reason) => reject(reason));
     });
 };
 
@@ -66,11 +66,10 @@ export const resetFields = (fields) => {
                 throw new Error(`Field ${k} doesn't have reset function of correct type.`);
             }
         });
-    
+
     // Validates all fields
-    Object
-        .values(fields)
-        .forEach((cur) => cur.reset());
+    Object.values(fields)
+          .forEach((cur) => cur.reset());
 };
 
 /**

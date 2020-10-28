@@ -69,8 +69,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
         const validationResult = validationFn(v);
         if (typeof validationResult === "boolean") {
             return _setValidationResult(!validationResult);
-        }
-        else {
+        } else {
             return new Promise((resolve, reject) => 
                 Promise.resolve(validationResult)
                     .then(result => resolve(_setValidationResult(!result)))
