@@ -6,7 +6,7 @@ const EmailComponentWithFields = (props) => {
     const email = useValidation(props.email, props.emailValidation);
 
     useEffect(() => {
-        var validationResult = validateFields([email]);
+        var validationResult = validateFields({ email });
         if (typeof validationResult === "boolean") {
             props.onValidateFields(validationResult);
         } else  {
