@@ -22,7 +22,8 @@ export const extractValues = (fields) => {
  * Validates all forms' fields.
  * 
  * @param {Object.<string, Object>} fields Form's fields
- * @returns true if there is any error in the form, false otherwise
+ * @returns {boolean|Promise<boolean>} true if there is any error in the form, false otherwise. 
+ *                                     Promise with same result when at least one validation function resolved to Promise.
  */
 export const validateFields = (fields) => {
     // Checks whether all fields have correct validation function
@@ -34,10 +35,21 @@ export const validateFields = (fields) => {
             }
         });
 
-    // Validates all fields
-    return Object
-        .values(fields)
-        .reduce((acc, cur) => cur.validate(cur.value) || acc, false);
+    // Validate all fields
+    var validationResults = 
+        Object.values(fields)
+              .map(field => field.validate(field.value));
+
+    // When all results are known (not Promise) return true if there are any errors
+    if (validationResults.every(result => typeof result === "boolean"))
+        return validationResults.some(result => result);
+
+    // Resolve all validation promises and return 
+    return new Promise((resolve, reject) => {
+        Promise.all(validationResults.map(result => Promise.resolve(result)))
+               .then(results => resolve(results.some(result => result)))
+               .catch((reason) => reject(reason));
+    });
 };
 
 /**
@@ -54,11 +66,10 @@ export const resetFields = (fields) => {
                 throw new Error(`Field ${k} doesn't have reset function of correct type.`);
             }
         });
-    
+
     // Validates all fields
-    Object
-        .values(fields)
-        .forEach((cur) => cur.reset());
+    Object.values(fields)
+          .forEach((cur) => cur.reset());
 };
 
 /**
@@ -69,8 +80,16 @@ export const resetFields = (fields) => {
  * @param {function} onSubmit On submit callback
  */
 export const submitForm = (fields, onSubmit) => {    
-    if (!validateFields(fields)) {
-        onSubmit(extractValues(fields));
+    const validationResult = validateFields(fields);
+    if (typeof validationResult === "boolean") {
+        if (!validationResult)
+            onSubmit(extractValues(fields));
+    } else {
+        validationResult.then(hasErrors => {
+            if (!hasErrors) {
+                onSubmit(extractValues(fields));
+            }
+        });
     }
 };
 
