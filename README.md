@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![npm version](https://badge.fury.io/js/%40enterwell%2Freact-form-validation.svg)](https://www.npmjs.com/package/@enterwell/react-form-validation)
+[![npm version](https://img.shields.io/npm/v/@enterwell/react-form-validation)](https://www.npmjs.com/package/@enterwell/react-form-validation)
 ![Build](https://github.com/Enterwell/react-form-validation/workflows/Node.js%20Package/badge.svg?branch=master)
 
 </div>
