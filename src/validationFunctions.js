@@ -22,7 +22,7 @@ export const areEqual = (v1, v2) => v1 === v2;
  * @param {any} v Value
  * @returns true if value is true (indicating that no error is present), false otherwise
  */
-export const isTrue = (v) => typeof v === "boolean" || v;
+export const isTrue = (v) => typeof v === "boolean" && v;
 
 /**
  * Checks if value is null.
