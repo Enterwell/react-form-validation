@@ -682,7 +682,7 @@ cov_kvc5ctvd4().s[4]++;
 var isTrue = function isTrue(v) {
   cov_kvc5ctvd4().f[2]++;
   cov_kvc5ctvd4().s[5]++;
-  return (cov_kvc5ctvd4().b[0][0]++, typeof v === "boolean") || (cov_kvc5ctvd4().b[0][1]++, v);
+  return (cov_kvc5ctvd4().b[0][0]++, typeof v === "boolean") && (cov_kvc5ctvd4().b[0][1]++, v);
 };
 /**
  * Checks if value is null.

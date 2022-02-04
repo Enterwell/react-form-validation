@@ -9,7 +9,7 @@ var _react = require("react");
 
 function cov_1ks43zufjm() {
   var path = "C:\\Users\\Aleks\\Documents\\GitHub\\react-form-validation\\src\\useValidation.js";
-  var hash = "682567f3bc625bfc84ba3a20c9a3f85050b8026d";
+  var hash = "2143a9b0d54ea12e1619779e702c68ce30a85e9e";
   var global = new Function("return this")();
   var gcv = "__coverage__";
   var coverageData = {
@@ -31,7 +31,7 @@ function cov_1ks43zufjm() {
           column: 29
         },
         end: {
-          line: 95,
+          line: 94,
           column: 1
         }
       },
@@ -261,7 +261,7 @@ function cov_1ks43zufjm() {
           column: 21
         },
         end: {
-          line: 79,
+          line: 78,
           column: 5
         }
       },
@@ -281,7 +281,7 @@ function cov_1ks43zufjm() {
           column: 8
         },
         end: {
-          line: 78,
+          line: 77,
           column: 9
         }
       },
@@ -297,91 +297,91 @@ function cov_1ks43zufjm() {
       },
       "28": {
         start: {
-          line: 74,
+          line: 73,
           column: 12
         },
         end: {
-          line: 77,
+          line: 76,
           column: 54
         }
       },
       "29": {
         start: {
-          line: 75,
+          line: 74,
           column: 16
         },
         end: {
-          line: 77,
+          line: 76,
           column: 52
         }
       },
       "30": {
         start: {
-          line: 76,
+          line: 75,
           column: 36
         },
         end: {
-          line: 76,
+          line: 75,
           column: 74
         }
       },
       "31": {
         start: {
-          line: 77,
+          line: 76,
           column: 37
         },
         end: {
-          line: 77,
+          line: 76,
           column: 51
         }
       },
       "32": {
         start: {
-          line: 81,
+          line: 80,
           column: 18
         },
         end: {
-          line: 85,
+          line: 84,
           column: 5
         }
       },
       "33": {
         start: {
-          line: 82,
+          line: 81,
           column: 8
         },
         end: {
-          line: 82,
+          line: 81,
           column: 31
         }
       },
       "34": {
         start: {
-          line: 83,
+          line: 82,
           column: 8
         },
         end: {
-          line: 83,
+          line: 82,
           column: 24
         }
       },
       "35": {
         start: {
-          line: 84,
+          line: 83,
           column: 8
         },
         end: {
-          line: 84,
+          line: 83,
           column: 24
         }
       },
       "36": {
         start: {
-          line: 87,
+          line: 86,
           column: 4
         },
         end: {
-          line: 94,
+          line: 93,
           column: 6
         }
       }
@@ -405,7 +405,7 @@ function cov_1ks43zufjm() {
             column: 69
           },
           end: {
-            line: 95,
+            line: 94,
             column: 1
           }
         },
@@ -501,7 +501,7 @@ function cov_1ks43zufjm() {
             column: 28
           },
           end: {
-            line: 79,
+            line: 78,
             column: 5
           }
         },
@@ -511,97 +511,97 @@ function cov_1ks43zufjm() {
         name: "(anonymous_5)",
         decl: {
           start: {
-            line: 74,
+            line: 73,
             column: 31
           },
           end: {
-            line: 74,
+            line: 73,
             column: 32
           }
         },
         loc: {
           start: {
-            line: 75,
+            line: 74,
             column: 16
           },
           end: {
-            line: 77,
+            line: 76,
             column: 52
           }
         },
-        line: 75
+        line: 74
       },
       "6": {
         name: "(anonymous_6)",
         decl: {
           start: {
-            line: 76,
+            line: 75,
             column: 26
           },
           end: {
-            line: 76,
+            line: 75,
             column: 27
           }
         },
         loc: {
           start: {
-            line: 76,
+            line: 75,
             column: 36
           },
           end: {
-            line: 76,
+            line: 75,
             column: 74
           }
         },
-        line: 76
+        line: 75
       },
       "7": {
         name: "(anonymous_7)",
         decl: {
           start: {
-            line: 77,
+            line: 76,
             column: 27
           },
           end: {
-            line: 77,
+            line: 76,
             column: 28
           }
         },
         loc: {
           start: {
-            line: 77,
+            line: 76,
             column: 37
           },
           end: {
-            line: 77,
+            line: 76,
             column: 51
           }
         },
-        line: 77
+        line: 76
       },
       "8": {
         name: "(anonymous_8)",
         decl: {
           start: {
-            line: 81,
+            line: 80,
             column: 18
           },
           end: {
-            line: 81,
+            line: 80,
             column: 19
           }
         },
         loc: {
           start: {
-            line: 81,
+            line: 80,
             column: 24
           },
           end: {
-            line: 85,
+            line: 84,
             column: 5
           }
         },
-        line: 81
+        line: 80
       }
     },
     branchMap: {
@@ -942,7 +942,7 @@ function cov_1ks43zufjm() {
             column: 8
           },
           end: {
-            line: 78,
+            line: 77,
             column: 9
           }
         },
@@ -953,7 +953,7 @@ function cov_1ks43zufjm() {
             column: 8
           },
           end: {
-            line: 78,
+            line: 77,
             column: 9
           }
         }, {
@@ -962,7 +962,7 @@ function cov_1ks43zufjm() {
             column: 8
           },
           end: {
-            line: 78,
+            line: 77,
             column: 9
           }
         }],
@@ -1033,7 +1033,7 @@ function cov_1ks43zufjm() {
       "10": [0, 0]
     },
     _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    hash: "682567f3bc625bfc84ba3a20c9a3f85050b8026d"
+    hash: "2143a9b0d54ea12e1619779e702c68ce30a85e9e"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
