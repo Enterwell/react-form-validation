@@ -17,8 +17,8 @@
     },
     "scripts": {
         "build": "babel src/ -d dist",
-        "test": "cypress run",
-        "test:open": "cypress open"
+        "test": "cross-env NODE_ENV=test cypress run",
+        "test:open": "cross-env NODE_ENV=test cypress open"
     },
     "main": "./dist/index.js",
     "files": [
@@ -40,6 +40,7 @@
         "@cypress/code-coverage": "^3.8.2",
         "babel-loader": "^8.1.0",
         "babel-plugin-istanbul": "^6.0.0",
+        "cross-env": "^7.0.3",
         "cypress": "^5.5.0",
         "cypress-react-unit-test": "^4.16.7",
         "react": "^16.13.1",
