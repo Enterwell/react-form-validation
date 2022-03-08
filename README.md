@@ -103,7 +103,7 @@ console.log(userFormData.name) // {value: "Matej", error: false, onChange: ƒ, o
 
 ___
 
-### `extractValue(fields)`
+### `extractValues(fields)`
 
 Util function for extracting values from fields' data objects.
 
