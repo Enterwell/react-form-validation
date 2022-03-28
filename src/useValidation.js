@@ -16,8 +16,8 @@ const DEFAULT_CONFIG = {
  * @returns object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
  */
 export const useValidation = (defaultValue, validationFn, config) => {
-    // Checks whether validation function is really funcion
-    if (!Object.prototype.toString.call(validationFn) == '[object Function]') {
+    // Checks whether validation function is really function
+    if (!(Object.prototype.toString.call(validationFn) == '[object Function]')) {
         throw new Error('Incorrect type of the validation function.')
     }
 
