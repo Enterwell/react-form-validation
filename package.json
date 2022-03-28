@@ -20,6 +20,7 @@
         "test": "cross-env NODE_ENV=test cypress run",
         "test:open": "cross-env NODE_ENV=test cypress open"
     },
+    "types": "types/index.d.ts",
     "main": "./dist/index.js",
     "files": [
         "dist"
