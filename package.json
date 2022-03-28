@@ -1,6 +1,6 @@
 {
     "name": "@enterwell/react-form-validation",
-    "version": "1.1.11",
+    "version": "1.1.12",
     "description": "Form validation functionality for React components",
     "license": "MIT",
     "repository": {
@@ -23,7 +23,8 @@
     "types": "types/index.d.ts",
     "main": "./dist/index.js",
     "files": [
-        "dist"
+        "dist",
+        "types"
     ],
     "keywords": [
         "react",
