@@ -50,12 +50,12 @@ export const useValidation = (defaultValue, validationFn, config) => {
         const activeConfig = config ?? _config;
 
         // Value is validated if it is dirty or if dirtiness should be ignored
-        if (_config.ignoreDirtiness || dirty) {
+        if (activeConfig.ignoreDirtiness || dirty) {
             validate(value, activeConfig);
         }
 
         // Resets the dirty flag
-        if (!_config.ignoreDirtiness && !dirty) {
+        if (!activeConfig.ignoreDirtiness && !dirty) {
             setDirty(false);
         }
     };
