@@ -25,56 +25,61 @@ export const useValidation = (defaultValue, validationFn, config) => {
         ...DEFAULT_CONFIG,
         ...config
     };
-    
+
     const [value, setValue] = useState(defaultValue);
     const [error, setError] = useState(false);
     const [dirty, setDirty] = useState(false);
 
-    const onChange = (e) => {
-        const v = _config.receiveEvent ? e.target.value : e;
+    const onChange = (e, config) => {
+        const activeConfig = config ?? _config;
+        const v = activeConfig.receiveEvent ? e.target.value : e;
         setValue(v);
 
         // Setting dirty flag indicates that value has been changed
-        if (!_config.ignoreDirtiness && !dirty) {
+        if (!activeConfig.ignoreDirtiness && !dirty) {
             setDirty(true);
         }
 
         // Value is validated on change, only if previously was incorrect
         if (error) {
-            validate(v);
+            validate(v, activeConfig);
         }
     };
 
-    const onBlur = () => {
+    const onBlur = (config) => {
+        const activeConfig = config ?? _config;
+
         // Value is validated if it is dirty or if dirtiness should be ignored
         if (_config.ignoreDirtiness || dirty) {
-            validate(value);
+            validate(value, activeConfig);
         }
 
         // Resets the dirty flag
         if (!_config.ignoreDirtiness && !dirty) {
             setDirty(false);
-        }        
+        }
     };
 
-    const _setValidationResult = (isError) => {
+    const _setValidationResult = (isError, config) => {
+        const activeConfig = config ?? _config;
+
         // Applies the reverse logic if needed
-        const _error = _config.reversed ? !isError : isError;
+        const _error = activeConfig.reversed ? !isError : isError;
         setError(_error);
         return _error;
     }
 
-    const validate = (v) => {        
+    const validate = (v, config) => {
         // Validates the value
         const validationResult = validationFn(v);
         if (typeof validationResult === "boolean") {
-            return _setValidationResult(!validationResult);
+            return _setValidationResult(!validationResult, config);
         } else {
-            return new Promise((resolve, reject) => 
+            return new Promise((resolve, reject) =>
                 Promise.resolve(validationResult)
-                    .then(result => resolve(_setValidationResult(!result)))
+                    .then(result => resolve(_setValidationResult(!result, config)))
                     .catch(reason => reject(reason)));
-        }        
+        }
     };
 
     const reset = () => {
