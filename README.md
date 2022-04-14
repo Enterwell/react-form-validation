@@ -111,7 +111,7 @@ Util function for extracting values from fields' data objects.
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{  value: any }_ | yes | Form field's data (each field must have `value` property - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: { value: any },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `value` property - other properties are not important) |
 
 #### Returns
 
@@ -138,7 +138,7 @@ Util function for validating values of all fields
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{<br>&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: {<br>&nbsp;&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>&nbsp;&nbsp;},<br/>&nbsp;&nbsp;...<br />]_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
 
 #### Returns
 
@@ -165,7 +165,7 @@ Util function for resetting all fields' data.
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{  reset: () => void }_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: { reset: () => void },<br />&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
 
 #### Usage example
 
@@ -185,7 +185,7 @@ Util function for handling the form submit. Form's fields are first validated. I
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{<br>&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: {<br>&nbsp;&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>&nbsp;&nbsp;},<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
 | onSubmit | _(any) => void_ | yes | On submit callback |
 
 #### Usage example
@@ -210,7 +210,7 @@ Util function for handling the form cancel. Form's fields are reset and `onCance
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{  reset: () => void }_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: { reset: () => void },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `reset` property - other properties are not important) |
 | onCancel | _(any) => void_ | yes | On cancel callback |
 
 #### Usage example
@@ -293,5 +293,5 @@ Is non-empty array  validation. Value of the field with this validation function
 
 We noticed that there are few things which could be added to our package in order to make it more flexible and easy to use. Here is what you can expect in the future:
 
-- additional config which will enable to change when value is validate (e.g. only in `onChange`, in `onBlur` but only if current value is not valid and so on)
-- more validation functions
+* additional config which will enable to change when value is validate (e.g. only in `onChange`, in `onBlur` but only if current value is not valid and so on)
+* more validation functions
