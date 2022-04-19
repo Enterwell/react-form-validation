@@ -84,7 +84,7 @@ Hook that keeps on form field's data.
 
 | Type <div style="width: 200px"></div> | Description |
 |---- | ----------- |
-| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;onChange: (any) => void<br>&nbsp;&nbsp;&nbsp;onBlur: () => void<br>&nbsp;&nbsp;&nbsp;validate: (any) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (change's the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li></ul>|
+| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;onChange: (any, config) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (config) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (change's the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
 
 #### Usage example
 
@@ -293,5 +293,5 @@ Is non-empty array  validation. Value of the field with this validation function
 
 We noticed that there are few things which could be added to our package in order to make it more flexible and easy to use. Here is what you can expect in the future:
 
-- additional config which will enable to change when value is validate (e.g. only in `onChange`, in `onBlur` but only if current value is not valid and so on)
-- more validation functions
+* additional config which will enable to change when value is validate (e.g. only in `onChange`, in `onBlur` but only if current value is not valid and so on)
+* more validation functions

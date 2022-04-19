@@ -7,15 +7,15 @@ export declare interface FieldConfig {
 export declare interface Field {
     value: any,
     error: boolean,
-    onChange: (v: any) => void,
-    onBlur: () => void,
-    validate: (v: any) => boolean | Promise<boolean>,
+    onChange: (v: any, config: FieldConfig) => void,
+    onBlur: (config: FieldConfig) => void,
+    validate: (v: any, config: FieldConfig) => boolean | Promise<boolean>,
     reset: () => void,
 }
 
 export declare interface Fields {
     [key: string]: Field
-};
+}
 
 export declare function useValidation(initialValue: any, validationFn: (() => boolean) | (() => Promise<boolean>), config: FieldConfig): Field;
 
