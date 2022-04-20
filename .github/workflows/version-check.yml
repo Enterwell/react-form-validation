@@ -1,0 +1,42 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs: 
+  checkVersion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: get-current-version
+        id: current-version
+        uses: martinbeentjes/npm-get-version-action@main
+
+      - name: get-npm-version
+        id: npm-version
+        run: |
+          PACKAGE_VERSION=$(npm view @enterwell/react-form-validation version)
+          echo ::set-output name=package-version::$PACKAGE_VERSION
+    
+      - name: versions-comparison
+        id: versions-comparison
+        run: |
+            function version_gt() { 
+              test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1";
+            }
+            
+            echo ::set-output name=version-valid::0
+            if version_gt ${{ steps.current-version.outputs.current-version }} ${{ steps.npm-version.outputs.package-version }}; then
+              echo ::set-output name=version-valid::1
+            fi
+            
+      - name: add-comment
+        if: ${{ steps.versions-comparison.outputs.version-valid == 0 }}
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+             @${{ github.event.pull_request.user.login }} Version should be bumped! 
