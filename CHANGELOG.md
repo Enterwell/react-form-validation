@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- `onBlur` not matching native callbacks
+- `onBlur` expecting config as first argument but receiving event #48
 
 ## [1.2.3] - 2022-04-19
 
