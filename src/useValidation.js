@@ -46,7 +46,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
         }
     };
 
-    const onBlur = (config) => {
+    const onBlur = (_event, config) => {
         const activeConfig = config ?? _config;
 
         // Value is validated if it is dirty or if dirtiness should be ignored
