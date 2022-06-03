@@ -1,6 +1,6 @@
 {
     "name": "@enterwell/react-form-validation",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "Form validation functionality for React components",
     "license": "MIT",
     "repository": {
@@ -13,14 +13,14 @@
         "url": "https://enterwell.net"
     },
     "engines": {
-        "node": ">=8"
+        "node": ">=16"
     },
     "scripts": {
         "build": "babel src/ -d dist",
         "test": "cross-env NODE_ENV=test cypress run",
         "test:open": "cross-env NODE_ENV=test cypress open"
     },
-    "types": "types/index.d.ts",
+    "types": "./types/index.d.ts",
     "main": "./dist/index.js",
     "files": [
         "dist",
@@ -44,12 +44,12 @@
         "cross-env": "^7.0.3",
         "cypress": "^5.5.0",
         "cypress-react-unit-test": "^4.16.7",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
+        "react": "^18",
+        "react-dom": "^18",
         "webpack": "^4.44.2"
     },
     "peerDependencies": {
-        "react": "^16.13.1 || ^17",
-        "react-dom": "^16.13.1 || ^17"
+        "react": "^16.13.1 || ^17 || ^18",
+        "react-dom": "^16.13.1 || ^17 || ^18"
     }
 }
