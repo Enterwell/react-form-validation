@@ -17,5 +17,6 @@ export {
     isValidNumber,
     isPositiveNumber,
     isNegativeNumber,
-    isNonEmptyArray
+    isNonEmptyArray,
+    isValidEmail
 } from './validationFunctions';
