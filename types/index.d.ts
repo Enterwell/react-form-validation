@@ -46,3 +46,5 @@ export declare function isPositiveNumber(v: any): boolean;
 export declare function isNegativeNumber(v: any): boolean;
 
 export declare function isNonEmptyArray(v: any): boolean;
+
+export declare function isValidEmail(v: any): boolean;
