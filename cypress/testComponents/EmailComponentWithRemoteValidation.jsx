@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useValidation } from '../../src/useValidation';
+import { useValidation, isValidEmail } from '../../src';
 
 const EmailComponentWithRemoteValidation = (props) => {
-    const emailValidation = (value) => new Promise((resolve) => setTimeout(() => resolve(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value)), 2000));
+    const emailValidation = (value) => new Promise((resolve) => setTimeout(() => resolve(isValidEmail(value)), 2000));
     const email = useValidation(props.email, emailValidation);
 
     const validateAsync = async () => {
