@@ -11,6 +11,11 @@ export declare interface Field {
     onBlur: (event: any, config: FieldConfig) => void,
     validate: (v: any, config: FieldConfig) => boolean | Promise<boolean>,
     reset: () => void,
+    props: {
+        value: Field['value'],
+        onChange: Field['onChange'],
+        onBlur: Field['onBlur']
+    }
 }
 
 export declare interface Fields {
