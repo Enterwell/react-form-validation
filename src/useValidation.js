@@ -26,7 +26,8 @@ export const useValidation = (defaultValue, validationFn, config) => {
         ...config
     };
 
-    const [value, setValue] = useState(defaultValue);
+    const [resetToValue, setResetToValue] = useState(defaultValue);
+    const [value, setValue] = useState(resetToValue);
     const [error, setError] = useState(false);
     const [dirty, setDirty] = useState(false);
 
@@ -59,6 +60,11 @@ export const useValidation = (defaultValue, validationFn, config) => {
             setDirty(false);
         }
     };
+
+    const _handleSetValue = (v) => {
+        setResetToValue(v);
+        setValue(v);
+    }
 
     const _setValidationResult = (isError, config) => {
         const activeConfig = config ?? _config;
@@ -93,6 +99,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
         error,
         onChange,
         onBlur,
+        setValue: _handleSetValue,
         validate,
         reset
     };
