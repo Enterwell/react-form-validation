@@ -43,7 +43,7 @@ describe('useValidation', () => {
 
     it('validate_localValid_setValue', () => {
         const Component = () => {
-            const email = useValidation(undefined, emailValidation);
+            const email = useValidation(undefined, isValidEmail);
 
             useEffect(() => {
                 email.setValue(testEmailValid);
@@ -137,7 +137,7 @@ describe('formUtils', () => {
         let result = null;
 
         function Component() {
-            const email = useValidation(testEmailValid, emailValidation);
+            const email = useValidation(testEmailValid, isValidEmail);
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
@@ -156,7 +156,7 @@ describe('formUtils', () => {
         let result = null;
 
         function Component() {
-            const email = useValidation(testEmailInvalid, emailValidation);
+            const email = useValidation(testEmailInvalid, isValidEmail);
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
