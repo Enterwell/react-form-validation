@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { submitForm } from '../../src/formUtils';
-import { useValidation } from '../../src/useValidation';
+import { submitForm, useValidation } from '../../src';
 
 const EmailComponentWithSubmit = (props) => {
     const email = useValidation(props.email, props.emailValidation);

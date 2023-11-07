@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2023-11-07
+
+### Added
+
+- `setValues` helper function for setting field's values from provided data objects
+
+### Changed
+
+- `submitForm` now returns value of `onSubmit` callback
+- `useValidation` now returns additional `props` prop that only contains input-specific props that can be spread into most components directly
+
 ## [1.2.8] - 2022-10-24
 
 ### Fixed

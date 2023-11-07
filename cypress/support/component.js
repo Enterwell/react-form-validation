@@ -1,5 +1,5 @@
 // ***********************************************************
-// This example support/index.js is processed and
+// This example support/component.js is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -13,13 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import React Unit test Library
-// https://github.com/bahmutov/cypress-react-unit-test
-require('cypress-react-unit-test/support')
-import '@cypress/code-coverage/support'
-// Import commands.js using ES2015 syntax:
-import './commands'
-
-
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+import { mount } from 'cypress/react18'
+
+Cypress.Commands.add('mount', mount)
+
+// Example use:
+// cy.mount(<MyComponent />)
