@@ -95,17 +95,24 @@ export const resetFields = (fields) => {
  * 
  * @param {Object.<string, Object>} fields Form's fields
  * @param {function} onSubmit On submit callback
+ * @returns {Promise<unknown> | unknown | undefined} Returns the return value of onSubmit callback, 
+ *                                       wrapped in Promise if at least one validation function resolved to Promise. 
+ *                                       Returns undefined when form is not valid and onSubmit callback is not invoked or onSubmit function returns void.
  */
-export const submitForm = (fields, onSubmit) => {    
-    const validationResult = validateFields(fields);
-    if (typeof validationResult === "boolean") {
-        if (!validationResult)
-            onSubmit(extractValues(fields));
+export const submitForm = (fields, onSubmit) => {
+    const validationResultHasErrors = validateFields(fields);
+    if (typeof validationResultHasErrors === "boolean") {
+        if (validationResultHasErrors) {
+            return undefined;
+        } else {
+            return onSubmit(extractValues(fields));
+        }
     } else {
-        validationResult.then(hasErrors => {
-            if (!hasErrors) {
-                onSubmit(extractValues(fields));
-            }
+        return new Promise((resolve, reject) => {
+            validationResultHasErrors.then(hasErrors => {
+                if (hasErrors) resolve();
+                else resolve(onSubmit(extractValues(fields)));
+            }).catch(reject);
         });
     }
 };

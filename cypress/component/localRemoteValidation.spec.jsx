@@ -3,6 +3,7 @@ import EmailComponentWithFields from '../testComponents/EmailComponentWithFields
 import EmailComponentWithLocalValidation from '../testComponents/EmailComponentWithLocalValidation.jsx';
 import EmailComponentWithRemoteValidation from '../testComponents/EmailComponentWithRemoteValidation.jsx';
 import EmailComponentWithSubmit from '../testComponents/EmailComponentWithSubmit.jsx';
+import { submitForm } from '../../src/formUtils.js';
 import { useValidation } from '../../src/useValidation.js';
 const { mount } = require("cypress-react-unit-test/")
 
@@ -128,6 +129,63 @@ describe('formUtils', () => {
         mount(<EmailComponentWithSubmit email={testEmailInvalid} emailValidation={emailValidationRemote} onFormSubmit={handleFormSubmit} />)
         cy.wait(2000).then(() => {
             expect(values).to.be.empty;
+        });
+    });
+
+    it('submitForm_localValidReturnValues', () => {
+        const expectedResult = { result: 'ok' };
+        let result = null;
+
+        function Component() {
+            const email = useValidation(testEmailValid, emailValidation);
+            useEffect(() => {
+                result = submitForm([email], () => expectedResult);
+            }, []);
+            return (<div></div>);
+        }
+
+        mount(<Component />);
+
+        cy.then(() => {
+            expect(result).to.eql(expectedResult);
+        });
+    });
+
+    it('submitForm_localInvalidReturnValues', () => {
+        const expectedResult = { result: 'ok' };
+        let result = null;
+
+        function Component() {
+            const email = useValidation(testEmailInvalid, emailValidation);
+            useEffect(() => {
+                result = submitForm([email], () => expectedResult);
+            }, []);
+            return (<div></div>);
+        }
+
+        mount(<Component />);
+
+        cy.then(() => {
+            expect(result).to.be.undefined;
+        });
+    });
+
+    it('submitForm_remoteValidReturnValues', () => {
+        const expectedResult = { result: 'ok' };
+        let result = null;
+
+        function Component() {
+            const email = useValidation(testEmailValid, emailValidationRemote);
+            useEffect(async () => {
+                result = await submitForm([email], () => expectedResult);
+            }, []);
+            return (<div></div>);
+        }
+
+        mount(<Component />);
+
+        cy.wait(2000).then(() => {
+            expect(result).to.eql(expectedResult);
         });
     });
 });

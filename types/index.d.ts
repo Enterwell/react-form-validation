@@ -27,7 +27,7 @@ export declare function validateFields(fields: Fields): boolean | Promise<boolea
 
 export declare function resetFields(fields: Fields): void;
 
-export declare function submitForm(fields: Fields, onSubmit: () => object): void;
+export declare function submitForm(fields: Fields, onSubmit: (values: object) => object): Promise<object> | object | undefined;
 
 export declare function cancelForm(fields: Fields, onCancel: () => void): void;
 
