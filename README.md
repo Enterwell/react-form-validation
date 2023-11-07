@@ -7,7 +7,7 @@
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@enterwell/react-form-validation)](https://www.npmjs.com/package/@enterwell/react-form-validation)
-![Build](https://github.com/Enterwell/react-form-validation/workflows/Node.js%20Package/badge.svg?branch=master)
+[![Build](https://github.com/Enterwell/react-form-validation/actions/workflows/npm-publish.yml/badge.svg?branch=master)](https://github.com/Enterwell/react-form-validation/actions/workflows/npm-publish.yml)
 
 </div>
 
@@ -21,7 +21,7 @@
 
 ## Installation
 
-Package can be installed with one of the following commands (depending on whether you prefer `npm` or `yarn`)
+Package can be installed with one of the following commands (depending on whether you prefer `npm`, `yarn` or `pnpm`)
 
 ```bash
 npm install @enterwell/react-form-validation
@@ -31,19 +31,24 @@ npm install @enterwell/react-form-validation
 yarn add @enterwell/react-form-validation
 ```
 
+```bash
+pnpm add @enterwell/react-form-validation
+```
+
 ## Usage
 
-2 quick steps to validate any kind of input.
+Two quick steps to validate any kind of input.
 
-![GIF](docs/email-input.gif?raw=1)
+![Email input example](docs/email-input.gif?raw=1)
 
 Step 1:
 
-* Define validation function (or use some of predefined) and use it to initialize validation hook
+* Define custom validation (or use some of predefined) and use it to initialize validation hook
 
 ```jsx
-const emailValidation = (value) => /^.+@\S+\.\S+$/.test(value);
-const email = useValidation('matej.radovix@enterwell.net', emailValidation);
+import { isValidEmail, useValidation } from '@enterwell/react-form-validation';
+
+const email = useValidation('matej.radovix@enterwell.net', isValidEmail);
 ```
 
 Step 2:
@@ -57,7 +62,7 @@ Step 2:
         value={email.value}
         onChange={email.onChange}
         onBlur={email.onBlur}
-    >
+    />
     {email.error && (
         <span className="error-message">Incorrect email!</span>
     )}
@@ -324,6 +329,10 @@ Is negative number validation. Value of the field with this validation function 
 ### `isNonEmptyArray(value)`
 
 Is non-empty array  validation. Value of the field with this validation function will be correct if it is the non-empty array.
+
+### `isValidEmail(value)`
+
+Is valid email validation. Value od the field with this validation function will be correct if it is non-empty string with valid email address.
 
 ## Future plans
 

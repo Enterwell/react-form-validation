@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
+import { mount } from '@cypress/react18';
+import { isValidEmail } from '../../src';
 import EmailComponentWithFields from '../testComponents/EmailComponentWithFields.jsx';
 import EmailComponentWithLocalValidation from '../testComponents/EmailComponentWithLocalValidation.jsx';
 import EmailComponentWithRemoteValidation from '../testComponents/EmailComponentWithRemoteValidation.jsx';
 import EmailComponentWithSubmit from '../testComponents/EmailComponentWithSubmit.jsx';
 import { submitForm } from '../../src/formUtils.js';
 import { useValidation } from '../../src/useValidation.js';
-const { mount } = require("cypress-react-unit-test/")
 
-const emailValidation = (value) => /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
-const emailValidationRemote = (value) => new Promise((resolve) => setTimeout(() => resolve(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value)), 2000));
+const emailValidationRemote = (value) => new Promise((resolve) => setTimeout(() => resolve(isValidEmail(value)), 2000));
 const testEmailValid = "matej.radovix@enterwell.net";
 const testEmailInvalid = "matej.radovix";
 
@@ -22,7 +22,7 @@ describe('useValidation', () => {
     it('validate_localValid', () => {
         mount(<EmailComponentWithLocalValidation email={testEmailValid} />);
         cy.contains(testEmailValid);
-        cy.get(".invalid").should("not.be.visible");
+        cy.get(".invalid").should("not.exist");
     });
 
     it('validate_localInvalid', () => {
@@ -33,7 +33,7 @@ describe('useValidation', () => {
     it('validate_remoteValid', () => {
         mount(<EmailComponentWithRemoteValidation email={testEmailValid} />);
         cy.wait(2000).contains(testEmailValid);
-        cy.get(".invalid").should("not.be.visible");
+        cy.get(".invalid").should("not.exist");
     });
 
     it('validate_remoteInvalid', () => {
@@ -43,7 +43,7 @@ describe('useValidation', () => {
 
     it('validate_localValid_setValue', () => {
         const Component = () => {
-            const email = useValidation(undefined, emailValidation);
+            const email = useValidation(undefined, isValidEmail);
 
             useEffect(() => {
                 email.setValue(testEmailValid);
@@ -63,19 +63,19 @@ describe('useValidation', () => {
 
         mount(<Component />);
         cy.wait(100).contains(testEmailValid);
-        cy.get(".invalid").should("not.be.visible");
+        cy.get(".invalid").should("not.exist");
     });
 });
 
 describe('formUtils', () => {
     it('validateFields_localValid', () => {
         const handleValidateFields = (r) => expect(r).eq(false);
-        mount(<EmailComponentWithFields email={testEmailValid} emailValidation={emailValidation} onValidateFields={handleValidateFields} />)
+        mount(<EmailComponentWithFields email={testEmailValid} emailValidation={isValidEmail} onValidateFields={handleValidateFields} />)
     });
 
     it('validateFields_localInvalid', () => {
         const handleValidateFields = (r) => expect(r).eq(true);
-        mount(<EmailComponentWithFields email={testEmailInvalid} emailValidation={emailValidation} onValidateFields={handleValidateFields} />)
+        mount(<EmailComponentWithFields email={testEmailInvalid} emailValidation={isValidEmail} onValidateFields={handleValidateFields} />)
     });
 
     it('validateFields_remoteValid', () => {
@@ -99,7 +99,7 @@ describe('formUtils', () => {
     it('submitForm_localValid', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
-        mount(<EmailComponentWithSubmit email={testEmailValid} emailValidation={emailValidation} onFormSubmit={handleFormSubmit} />)
+        mount(<EmailComponentWithSubmit email={testEmailValid} emailValidation={isValidEmail} onFormSubmit={handleFormSubmit} />)
         cy.wait(100).then(() => {
             expect(values).to.not.be.empty;
         });
@@ -108,7 +108,7 @@ describe('formUtils', () => {
     it('submitForm_localInvalid', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
-        mount(<EmailComponentWithSubmit email={testEmailInvalid} emailValidation={emailValidation} onFormSubmit={handleFormSubmit} />)
+        mount(<EmailComponentWithSubmit email={testEmailInvalid} emailValidation={isValidEmail} onFormSubmit={handleFormSubmit} />)
         cy.wait(100).then(() => {
             expect(values).to.be.empty;
         });
@@ -137,7 +137,7 @@ describe('formUtils', () => {
         let result = null;
 
         function Component() {
-            const email = useValidation(testEmailValid, emailValidation);
+            const email = useValidation(testEmailValid, isValidEmail);
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
@@ -156,7 +156,7 @@ describe('formUtils', () => {
         let result = null;
 
         function Component() {
-            const email = useValidation(testEmailInvalid, emailValidation);
+            const email = useValidation(testEmailInvalid, isValidEmail);
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
