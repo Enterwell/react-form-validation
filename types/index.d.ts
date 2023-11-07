@@ -21,6 +21,8 @@ export declare function useValidation(initialValue: any, validationFn: (() => bo
 
 export declare function extractValues(fields: Fields): object;
 
+export declare function setValues(fields: Fields, values: object): void;
+
 export declare function validateFields(fields: Fields): boolean | Promise<boolean>;
 
 export declare function resetFields(fields: Fields): void;

@@ -19,6 +19,23 @@ export const extractValues = (fields) => {
 };
 
 /**
+ * Sets the values of form fields without changing dirty flag.
+ * When form is reset, these values will be used as initial values.
+ * 
+ * @param {Object.<string, any>} fields Form's fields
+ * @param {Object.<string, any>} values Form's fields new values
+ */
+export const setValues = (fields, values) => {
+    Object
+        .entries(fields)
+        .forEach(([k, v]) => {
+            if (values.hasOwnProperty(k)) {
+                v.setValue(values[k]);
+            }
+        });
+};
+
+/**
  * Validates all forms' fields.
  * 
  * @param {Object.<string, Object>} fields Form's fields

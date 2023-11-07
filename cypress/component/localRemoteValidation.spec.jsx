@@ -40,6 +40,31 @@ describe('useValidation', () => {
         mount(<EmailComponentWithRemoteValidation email={testEmailInvalid} />);
         cy.wait(2000).get(".invalid").should("be.visible");
     });
+
+    it('validate_localValid_setValue', () => {
+        const Component = () => {
+            const email = useValidation(undefined, emailValidation);
+
+            useEffect(() => {
+                email.setValue(testEmailValid);
+                if (email.value) {
+                    email.validate(email.value);
+                }
+             }, [email]);
+
+            return (
+                <div>
+                    <input defaultValue={email.value}></input>
+                    <p>{email.value}</p>
+                    {email.error && <p className="invalid">Invalid email</p>}
+                </div>
+            )
+        };
+
+        mount(<Component />);
+        cy.wait(100).contains(testEmailValid);
+        cy.get(".invalid").should("not.be.visible");
+    });
 });
 
 describe('formUtils', () => {
