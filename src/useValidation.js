@@ -96,11 +96,16 @@ export const useValidation = (defaultValue, validationFn, config) => {
 
     return {
         value,
-        error,
         onChange,
         onBlur,
+        error,
         setValue: _handleSetValue,
         validate,
-        reset
+        reset,
+        props: {
+            value,
+            onChange,
+            onBlur
+        }
     };
 };
