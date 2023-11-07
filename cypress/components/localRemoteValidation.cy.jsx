@@ -63,7 +63,7 @@ describe('useValidation', () => {
 
         mount(<Component />);
         cy.wait(100).contains(testEmailValid);
-        cy.get(".invalid").should("not.be.visible");
+        cy.get(".invalid").should("not.exist");
     });
 });
 
