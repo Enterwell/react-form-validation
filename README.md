@@ -89,7 +89,7 @@ Hook that keeps on form field's data.
 
 | Type <div style="width: 200px"></div> | Description |
 |---- | ----------- |
-| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;onChange: (any, config) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (change's the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
+| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;onChange: (any, config) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config) => void<br>&nbsp;&nbsp;&nbsp;setValue: (value: any) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (change's the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`setValue` - sets current value without marking field as diry. Set value will be used as new initial value when reset.</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
 
 #### Usage example
 
@@ -132,7 +132,37 @@ import { ..., extractValues } from '@enterwell/react-form-validation';
 /* useValidation example's code... */
 
 const data = extractValues(userFormData);
-console.log(data) // {name: "Matej", age: 10}
+//    ^ { name: "Matej", age: 10 }
+```
+
+### `setValues(fields, values)`
+
+Util function for setting field's values from provided data objects.
+
+#### Params
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{<br/>&nbsp;&nbsp;key: { value: any },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data. |
+| values | _{<br/>&nbsp;&nbsp;key: any,<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's values to be set to fields. |
+
+#### Usage example
+
+```jsx
+import { ..., setValues } from '@enterwell/react-form-validation';
+
+const formData = {
+    name: useValidation('', isNonEmptyString)
+};
+
+const item = useItem();
+useEffect(() => {
+    if (item) {
+        setValues(formData, {
+            name: item.name
+        });
+    }
+}, [item]);
 ```
 
 ### `validateFields(fields)`
@@ -184,7 +214,7 @@ resetFields(userFormData);
 
 ### `submitForm(fields, onSubmit)`
 
-Util function for handling the form submit. Form's fields are first validated. If all values are correct, they are extracted to data object and passed to `onSubmit` callback.
+Util function for handling the form submit. Form's fields are first validated. If all values are correct, they are extracted to data object and passed to `onSubmit` callback. Returns value of `onSubmit` callback.
 
 #### Params
 
@@ -192,6 +222,12 @@ Util function for handling the form submit. Form's fields are first validated. I
 | ---- | ---- | ---- | ----------- |
 | fields | _{<br/>&nbsp;&nbsp;key: {<br>&nbsp;&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>&nbsp;&nbsp;},<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
 | onSubmit | _(any) => void_ | yes | On submit callback |
+
+#### Returns
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _object_ or _Promise&lt;object&gt;_ or _undefined_ | Return value of `onSubmit` callback, wrapped in promise with same result when at least one validation function resolved to Promise. Returns `undefined` if validation fails or `onSubmit` is of return type _void_. |
 
 #### Usage example
 
