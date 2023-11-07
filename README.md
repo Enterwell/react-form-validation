@@ -296,7 +296,7 @@ Is non-empty array  validation. Value of the field with this validation function
 
 ### `isValidEmail(value)`
 
-Is valid email validation. Value od the field with this validation functino will be correct if it is non-empty string with valid email address.
+Is valid email validation. Value od the field with this validation function will be correct if it is non-empty string with valid email address.
 
 ## Future plans
 
