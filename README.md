@@ -179,7 +179,7 @@ resetFields(userFormData);
 
 ### `submitForm(fields, onSubmit)`
 
-Util function for handling the form submit. Form's fields are first validated. If all values are correct, they are extracted to data object and passed to `onSubmit` callback.
+Util function for handling the form submit. Form's fields are first validated. If all values are correct, they are extracted to data object and passed to `onSubmit` callback. Returns value of `onSubmit` callback.
 
 #### Params
 
@@ -187,6 +187,12 @@ Util function for handling the form submit. Form's fields are first validated. I
 | ---- | ---- | ---- | ----------- |
 | fields | _{<br/>&nbsp;&nbsp;key: {<br>&nbsp;&nbsp;&nbsp;&nbsp;value: any<br>&nbsp;&nbsp;&nbsp;&nbsp;validate: (any) => boolean<br>&nbsp;&nbsp;},<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `value`  and `validate` properties - other properties are not important) |
 | onSubmit | _(any) => void_ | yes | On submit callback |
+
+#### Returns
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _object_ or _Promise&lt;object&gt;_ or _undefined_ | Return value of `onSubmit` callback, wrapped in promise with same result when at least one validation function resolved to Promise. Returns `undefined` if validation fails or `onSubmit` is of return type _void_. |
 
 #### Usage example
 
