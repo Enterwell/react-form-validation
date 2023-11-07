@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - `submitForm` now returns value of `onSubmit` callback
+- `useValidation` now returns additional `props` prop that only contains input-specific props that can be spread into most components directly
 
 ## [1.2.8] - 2022-10-24
 
