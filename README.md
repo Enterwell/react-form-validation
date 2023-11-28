@@ -334,6 +334,10 @@ Is non-empty array  validation. Value of the field with this validation function
 
 Is valid email validation. Value od the field with this validation function will be correct if it is non-empty string with valid email address.
 
+### `isValidIpAddress(value)`
+
+Is valid IP address validation. Value od the field with this validation function will be correct if it is a non-empty string with valid IPv4 or IPv6 address.
+
 ## Future plans
 
 We noticed that there are few things which could be added to our package in order to make it more flexible and easy to use. Here is what you can expect in the future:

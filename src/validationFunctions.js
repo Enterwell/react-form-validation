@@ -82,3 +82,24 @@ const emailRegex = new RegExp(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'
  * @returns {boolean} true if value is valid email address (RFC 5322), false otherwise
  */
 export const isValidEmail = (v) => isNonEmptyString(v) && emailRegex.test(v);
+
+/**
+ * Checks if the value is a valid IPv4 or IPv6 address.
+ *
+ * @param {any} v Value
+ * @returns {boolean} true if the value is a valid IPv4 or IPv6 address, false otherwise
+ */
+export const isValidIpAddress = (v) => {
+  const ipv4RegExp = /^(\d{1,3}\.){3}\d{1,3}$/;
+  const ipv6RegExp = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
+
+  if (ipv4RegExp.test(v)) {
+    return v.split('.').every((part) => parseInt(part) <= 255);
+  }
+
+  if (ipv6RegExp.test(v)) {
+    return v.split(':').every((part) => part.length <= 4);
+  }
+
+  return false;
+}

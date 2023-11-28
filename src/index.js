@@ -19,5 +19,6 @@ export {
     isPositiveNumber,
     isNegativeNumber,
     isNonEmptyArray,
-    isValidEmail
+    isValidEmail,
+    isValidIpAddress
 } from './validationFunctions';
