@@ -16,7 +16,7 @@
         "node": ">=18"
     },
     "scripts": {
-        "build": "babel src/ -d dist",
+        "build": "vite build",
         "test": "cross-env NODE_ENV=test cypress run --component",
         "test:open": "cross-env NODE_ENV=test cypress open"
     },
@@ -34,22 +34,14 @@
     ],
     "dependencies": {},
     "devDependencies": {
-        "@babel/cli": "7.23.0",
-        "@babel/core": "7.23.3",
-        "@babel/preset-env": "7.23.3",
-        "@babel/preset-react": "7.22.15",
-        "@cypress/code-coverage": "3.12.11",
         "@cypress/react18": "^2.0.0",
         "@types/react-dom": "18",
         "@vitejs/plugin-react": "^4.1.0",
-        "babel-loader": "9.1.3",
-        "babel-plugin-istanbul": "6.1.1",
         "cross-env": "7.0.3",
         "cypress": "13.3.0",
         "react": "^18",
         "react-dom": "^18",
-        "vite": "4.5.0",
-        "webpack": "^5.89.0"
+        "vite": "4.5.0"
     },
     "peerDependencies": {
         "react": "^16.13.1 || ^17 || ^18",
