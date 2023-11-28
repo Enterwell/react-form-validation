@@ -13,7 +13,7 @@
         "url": "https://enterwell.net"
     },
     "engines": {
-        "node": ">=16"
+        "node": ">=18"
     },
     "scripts": {
         "build": "babel src/ -d dist",
