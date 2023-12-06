@@ -59,9 +59,7 @@ Step 2:
 <div>
     <input
         className={email.error ? 'error' : 'no-error'}
-        value={email.value}
-        onChange={email.onChange}
-        onBlur={email.onBlur}
+        {...email.props} // This is shorthand for passing the `value`, `onChange` and `onBlur` properties
     />
     {email.error && (
         <span className="error-message">Incorrect email!</span>
