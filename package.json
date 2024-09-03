@@ -15,6 +15,7 @@
     "engines": {
         "node": ">=18"
     },
+    "packageManager": "pnpm@9.9.0",
     "scripts": {
         "build": "vite build",
         "test": "cross-env NODE_ENV=test cypress run --component",
