@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: Enable Corepack
+        run: corepack enable
       - run: pnpm install
       - run: pnpm build
       - run: pnpm test
