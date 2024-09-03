@@ -33,16 +33,15 @@
         "form",
         "validation"
     ],
-    "dependencies": {},
     "devDependencies": {
-        "@cypress/react18": "^2.0.0",
-        "@types/react-dom": "18",
-        "@vitejs/plugin-react": "^4.1.0",
+        "@cypress/react18": "2.0.1",
+        "@types/react-dom": "18.3.0",
+        "@vitejs/plugin-react": "4.3.1",
         "cross-env": "7.0.3",
-        "cypress": "13.6.0",
-        "react": "^18",
-        "react-dom": "^18",
-        "vite": "4.5.0"
+        "cypress": "13.14.1",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
+        "vite": "5.4.2"
     },
     "peerDependencies": {
         "react": "^16.13.1 || ^17 || ^18",
