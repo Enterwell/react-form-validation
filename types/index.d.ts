@@ -25,7 +25,7 @@ export declare interface Fields {
 
 export declare function useValidation(initialValue: any, validationFn: ((v: any) => boolean) | ((v: any) => Promise<boolean>), config?: FieldConfig): Field;
 
-export declare function extractValues(fields: Fields): object;
+export declare function extractValues(fields: Fields): object | any;
 
 export declare function setValues(fields: Fields, values: object): void;
 
