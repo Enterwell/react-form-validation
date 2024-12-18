@@ -7,6 +7,7 @@ export declare interface FieldConfig {
 export declare interface Field {
     value: any,
     error: boolean,
+    dirty: boolean,
     setValue: (v: any) => void,
     onChange: (v: any, config?: FieldConfig) => void,
     onBlur: (event: any, config?: FieldConfig) => void,

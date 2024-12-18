@@ -96,9 +96,10 @@ export const useValidation = (defaultValue, validationFn, config) => {
 
     return {
         value,
+        error,
+        dirty,
         onChange,
         onBlur,
-        error,
         setValue: _handleSetValue,
         validate,
         reset,
