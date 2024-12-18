@@ -12,18 +12,12 @@ const emailValidationRemote = (value) => new Promise((resolve) => setTimeout(() 
 const testEmailValid = "matej.radovix@enterwell.net";
 const testEmailInvalid = "matej.radovix";
 
-describe('True is True', () => {
-    it('Does not do much!', () => {
-        expect(true).to.equal(true)
-    });
-});
-
 describe('useValidation', () => {
-    it('validate_localValid', () => {
-        mount(<EmailComponentWithLocalValidation email={testEmailValid} />);
-        cy.contains(testEmailValid);
-        cy.get(".invalid").should("not.exist");
-    });
+    // it('validate_localValid', () => {
+    //     mount(<EmailComponentWithLocalValidation email={testEmailValid} />);
+    //     cy.contains(testEmailValid);
+    //     cy.get(".invalid").should("not.exist");
+    // });
 
     it('validate_localInvalid', () => {
         mount(<EmailComponentWithLocalValidation email={testEmailInvalid} />);

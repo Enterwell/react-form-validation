@@ -1,49 +1,64 @@
 {
-    "name": "@enterwell/react-form-validation",
-    "version": "1.5.0",
-    "description": "Form validation functionality for React components",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Enterwell/react-form-validation"
+  "name": "@enterwell/react-form-validation",
+  "version": "1.5.0",
+  "description": "Form validation functionality for React components",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Enterwell/react-form-validation"
+  },
+  "author": {
+    "name": "Enterwell",
+    "email": "services@enterwell.net",
+    "url": "https://enterwell.net"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.9.0",
+  "scripts": {
+    "build": "tsup",
+    "test": "playwright test -c playwright-ct.config.ts",
+    "test:open": "playwright test --ui -c playwright-ct.config.ts"
+  },
+  "sideEffects": false,
+  "exports": {
+    "import": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/index.js"
     },
-    "author": {
-        "name": "Enterwell",
-        "email": "services@enterwell.net",
-        "url": "https://enterwell.net"
-    },
-    "engines": {
-        "node": ">=18"
-    },
-    "packageManager": "pnpm@9.9.0",
-    "scripts": {
-        "build": "vite build",
-        "test": "cross-env NODE_ENV=test cypress run --component",
-        "test:open": "cross-env NODE_ENV=test cypress open"
-    },
-    "types": "./types/index.d.ts",
-    "main": "./dist/index.js",
-    "files": [
-        "dist",
-        "types"
-    ],
-    "keywords": [
-        "react",
-        "hooks",
-        "form",
-        "validation"
-    ],
-    "devDependencies": {
-        "@cypress/react18": "2.0.1",
-        "@types/react-dom": "18.3.0",
-        "@vitejs/plugin-react": "4.3.1",
-        "cross-env": "7.0.3",
-        "cypress": "13.14.1",
-        "react": "18.3.1",
-        "react-dom": "18.3.1",
-        "vite": "5.4.2"
-    },
-    "peerDependencies": {
-        "react": "^16.13.1 || ^17 || ^18"
+    "require": {
+      "types": "./dist/src/index.d.cts",
+      "require": "./dist/index.cjs"
     }
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "validation"
+  ],
+  "devDependencies": {
+    "@cypress/react18": "2.0.1",
+    "@microsoft/api-extractor": "7.47.7",
+    "@playwright/experimental-ct-react": "^1.46.1",
+    "@playwright/test": "1.46.1",
+    "@types/node": "18.19.48",
+    "@types/react": "18.3.5",
+    "@types/react-dom": "18.3.0",
+    "cross-env": "7.0.3",
+    "cypress": "13.14.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsup": "8.2.4",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17 || ^18"
+  }
 }

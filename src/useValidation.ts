@@ -1,7 +1,14 @@
 import { useState } from 'react';
 
+export type ValidationFunction<T> = (value: T) => boolean | Promise<boolean>;
+export type FieldConfiguration = {
+    receiveEvent: boolean,
+    reversed: boolean,
+    ignoreDirtiness: boolean
+};
+
 // Default configuration
-const DEFAULT_CONFIG = {
+const DEFAULT_CONFIG: FieldConfiguration = {
     receiveEvent: true,
     reversed: false,
     ignoreDirtiness: false
@@ -10,15 +17,15 @@ const DEFAULT_CONFIG = {
 /**
  * Function represents the useValidation hook.
  * 
- * @param {any} defaultValue Default value
- * @param {function} validationFn Function used for value validation
- * @param {Object} config Hook configuration
+ * @param defaultValue Default value
+ * @param validationFn Function used for value validation
+ * @param config Hook configuration
  * @returns object containing current value, error flag, onBlur and onChange callbacks, validate function and reset function
  */
-export const useValidation = (defaultValue, validationFn, config) => {
+export function useValidation<T>(defaultValue: T, validationFn: ValidationFunction<T>, config: Partial<FieldConfiguration> = {}) {
     // Checks whether validation function is really function
     if (!(Object.prototype.toString.call(validationFn) == '[object Function]')) {
-        throw new Error('Incorrect type of the validation function.')
+        throw new Error('Incorrect type of the validation function.');
     }
 
     const _config = {
@@ -27,14 +34,15 @@ export const useValidation = (defaultValue, validationFn, config) => {
     };
 
     const [resetToValue, setResetToValue] = useState(defaultValue);
-    const [value, setValue] = useState(resetToValue);
+    const [value, setValue] = useState<T>(resetToValue);
     const [error, setError] = useState(false);
     const [dirty, setDirty] = useState(false);
 
-    const onChange = (e, config) => {
+    const onChange = (e: T | React.ChangeEvent<HTMLInputElement>, config: Partial<FieldConfiguration> = {}) => {
         const activeConfig = config ?? _config;
-        const v = activeConfig.receiveEvent ? e.target.value : e;
-        setValue(v);
+        const target = e != null && typeof e === 'object' && 'target' in e && 'value' in e.target ? e.target : null;
+        const v = activeConfig.receiveEvent ? (target ? target.value as T : null) : e as T;
+        setValue(v ?? defaultValue);
 
         // Setting dirty flag indicates that value has been changed
         if (!activeConfig.ignoreDirtiness && !dirty) {
@@ -47,7 +55,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
         }
     };
 
-    const onBlur = (_event, config) => {
+    const onBlur = (_event: unknown, config: Partial<FieldConfiguration> = {}) => {
         const activeConfig = config ?? _config;
 
         // Value is validated if it is dirty or if dirtiness should be ignored
@@ -61,30 +69,29 @@ export const useValidation = (defaultValue, validationFn, config) => {
         }
     };
 
-    const _handleSetValue = (v) => {
+    const _handleSetValue = (v: typeof defaultValue) => {
         setResetToValue(v);
         setValue(v);
-    }
+    };
 
-    const _setValidationResult = (isError, config) => {
+    const _setValidationResult = (isError: boolean, config: Partial<FieldConfiguration> = {}) => {
         const activeConfig = config ?? _config;
 
         // Applies the reverse logic if needed
         const _error = activeConfig.reversed ? !isError : isError;
         setError(_error);
         return _error;
-    }
+    };
 
-    const validate = (v, config) => {
+    const validate = (v: T | null, config: Partial<FieldConfiguration> = {}) => {
         // Validates the value
-        const validationResult = validationFn(v);
+        const validationResult = validationFn(v as T);
         if (typeof validationResult === "boolean") {
             return _setValidationResult(!validationResult, config);
         } else {
-            return new Promise((resolve, reject) =>
-                Promise.resolve(validationResult)
-                    .then(result => resolve(_setValidationResult(!result, config)))
-                    .catch(reason => reject(reason)));
+            return new Promise((resolve, reject) => Promise.resolve(validationResult)
+                .then(result => resolve(_setValidationResult(!result, config)))
+                .catch(reason => reject(reason)));
         }
     };
 
@@ -109,4 +116,4 @@ export const useValidation = (defaultValue, validationFn, config) => {
             onBlur
         }
     };
-};
+}

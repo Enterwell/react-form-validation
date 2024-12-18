@@ -1,48 +1,58 @@
+import { useValidation } from "./useValidation.js";
+
 /**
  * Checks whether some value is function or not.
  * 
- * @param {any} f Value that should be checked whether it is function or not
+ * @param f Value that should be checked whether it is function or not
  * @returns true if value is a function, false otherwise 
  */
-const isFunction = (f) => Object.prototype.toString.call(f) == '[object Function]';
+function isFunction(f: unknown) {
+    return Object.prototype.toString.call(f) == '[object Function]';
+}
+
+export type Field<T> = ReturnType<typeof useValidation<T>>;
+export type Fields = Record<string, Field<any>>;
+export type FieldsValues<TFields extends Fields> = {
+    [K in keyof TFields]: TFields[K]['value'];
+};
 
 /**
  * Extracts the values from form fields' objects.
  * 
- * @param {Object.<string, any>} fields Form's fields
+ * @param fields Form's fields
  * @returns object containing form fields' values
  */
-export const extractValues = (fields) => {
+export function extractValues<TFields extends Fields>(fields: TFields): FieldsValues<typeof fields> {
     return Object
         .entries(fields)
-        .reduce((acc, [k, v]) => ({ ...acc, [k]: v.value }), {});
-};
+        .reduce<FieldsValues<TFields>>((acc, [k, v]) => ({ ...acc, [k]: v.value }), {} as FieldsValues<TFields>);
+}
 
 /**
  * Sets the values of form fields without changing dirty flag.
  * When form is reset, these values will be used as initial values.
  * 
- * @param {Object.<string, any>} fields Form's fields
- * @param {Object.<string, any>} values Form's fields new values
+ * @param fields Form's fields
+ * @param values Form's fields new values
  */
-export const setValues = (fields, values) => {
+export function setValues<TFields extends Fields>(fields: TFields, values: FieldsValues<typeof fields>) {
     Object
         .entries(fields)
-        .forEach(([k, v]) => {
-            if (values.hasOwnProperty(k)) {
-                v.setValue(values[k]);
+        .forEach(([key, value]) => {
+            if (key in values) {
+                value.setValue(values[key]);
             }
         });
-};
+}
 
 /**
  * Validates all forms' fields.
  * 
- * @param {Object.<string, Object>} fields Form's fields
- * @returns {boolean|Promise<boolean>} true if there is any error in the form, false otherwise. 
+ * @param fields Form's fields
+ * @returns true if there is any error in the form, false otherwise. 
  *                                     Promise with same result when at least one validation function resolved to Promise.
  */
-export const validateFields = (fields) => {
+export function validateFields<TFields extends Fields>(fields: TFields) {
     // Checks whether all fields have correct validation function
     Object
         .entries(fields)
@@ -53,28 +63,27 @@ export const validateFields = (fields) => {
         });
 
     // Validate all fields
-    var validationResults = 
-        Object.values(fields)
-              .map(field => field.validate(field.value));
+    var validationResults = Object.values(fields)
+        .map(field => field.validate(field.value));
 
     // When all results are known (not Promise) return true if there are any errors
     if (validationResults.every(result => typeof result === "boolean"))
         return validationResults.some(result => result);
 
     // Resolve all validation promises and return 
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
         Promise.all(validationResults.map(result => Promise.resolve(result)))
-               .then(results => resolve(results.some(result => result)))
-               .catch((reason) => reject(reason));
+            .then(results => resolve(results.some(result => result)))
+            .catch((reason) => reject(reason));
     });
-};
+}
 
 /**
  * Resets forms' fields to their initial values.
  * 
- * @param {Object.<string, Object>} fields Form's fields
+ * @param fields Form's fields
  */
-export const resetFields = (fields) => {
+export function resetFields<TFields extends Fields>(fields: TFields) {
     // Checks whether all fields have correct validation function
     Object
         .entries(fields)
@@ -86,20 +95,22 @@ export const resetFields = (fields) => {
 
     // Validates all fields
     Object.values(fields)
-          .forEach((cur) => cur.reset());
-};
+        .forEach((cur) => cur.reset());
+}
 
 /**
  * Validates the forms' fields and invokes the provided callback with extracted 
  * form's values.
  * 
- * @param {Object.<string, Object>} fields Form's fields
- * @param {function} onSubmit On submit callback
- * @returns {Promise<unknown> | unknown | undefined} Returns the return value of onSubmit callback, 
+ * @param fields Form's fields
+ * @param onSubmit On submit callback
+ * @returns Returns the return value of onSubmit callback, 
  *                                       wrapped in Promise if at least one validation function resolved to Promise. 
  *                                       Returns undefined when form is not valid and onSubmit callback is not invoked or onSubmit function returns void.
  */
-export const submitForm = (fields, onSubmit) => {
+export function submitForm<TResponse, TFields extends Fields>(
+    fields: TFields,
+    onSubmit: (values: FieldsValues<typeof fields>) => TResponse | Promise<TResponse>) {
     const validationResultHasErrors = validateFields(fields);
     if (typeof validationResultHasErrors === "boolean") {
         if (validationResultHasErrors) {
@@ -108,22 +119,22 @@ export const submitForm = (fields, onSubmit) => {
             return onSubmit(extractValues(fields));
         }
     } else {
-        return new Promise((resolve, reject) => {
+        return new Promise<TResponse | null>((resolve, reject) => {
             validationResultHasErrors.then(hasErrors => {
-                if (hasErrors) resolve();
+                if (hasErrors) resolve(null);
                 else resolve(onSubmit(extractValues(fields)));
             }).catch(reject);
         });
     }
-};
+}
 
 /**
  * Resets the forms' fields and invokes the provided callback.
  * 
- * @param {Object.<string, Object>} fields Form's fields
- * @param {function} onCancel On cancel callback
+ * @param fields Form's fields
+ * @param onCancel On cancel callback
  */
-export const cancelForm = (fields, onCancel) => {
+export function cancelForm<TFields extends Fields>(fields: TFields, onCancel: () => void) {
     resetFields(fields);
     onCancel();
-};
+}

@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "include": [
+        "./src/**/*.ts*",
+        "./tests/**/*.ts*",
+        "./playwright/**/*.ts*"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "declaration": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "lib": [
+            "ES2022"
+        ],
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
+        "skipLibCheck": true,
+        "moduleDetection": "force",
+        "noUncheckedIndexedAccess": true,
+        "verbatimModuleSyntax": true,
+        "resolveJsonModule": true,
+        "noImplicitOverride": true,
+        "strict": true,
+        "target": "ES2022",
+        "noEmit": true
+    }
+}

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useValidation, isValidEmail } from '../../src';
 
-const EmailComponentWithLocalValidation = (props) => {
+const EmailComponentWithLocalValidation = (props: { email: string }) => {
     const email = useValidation(props.email, isValidEmail);
 
     useEffect(() => {
-       email.validate(email.value);
+        email.validate(email.value);
     }, []);
-    
+
     return (
         <div>
             <input defaultValue={email.value}></input>

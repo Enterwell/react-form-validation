@@ -1,14 +1,14 @@
-export { 
+export {
     useValidation
-} from './useValidation';
-export { 
-    extractValues, 
-    validateFields, 
+} from './useValidation.js';
+export {
+    extractValues,
+    validateFields,
     setValues,
-    resetFields, 
-    submitForm, 
-    cancelForm 
-} from './formUtils';
+    resetFields,
+    submitForm,
+    cancelForm
+} from './formUtils.js';
 export {
     noError,
     areEqual,
@@ -21,4 +21,4 @@ export {
     isNonEmptyArray,
     isValidEmail,
     isValidIpAddress
-} from './validationFunctions';
+} from './validationFunctions.js';
