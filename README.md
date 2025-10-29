@@ -15,7 +15,7 @@
 
 * Keeps form's state and validation results
 * Supports any kind of validation functions
-* Dirty checking (both user interaction and value change tracking)
+* Dirty checking (tracks both user interactions and value changes from initial state)
 * Track changes from initial values with `isDirty`
 * Separates data from view
 * Relies on hooks, but can easily be used with class components
