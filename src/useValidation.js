@@ -30,6 +30,9 @@ export const useValidation = (defaultValue, validationFn, config) => {
     const [value, setValue] = useState(resetToValue);
     const [error, setError] = useState(false);
     const [dirty, setDirty] = useState(false);
+    
+    // isDirty compares current value with initial value
+    const isDirty = value !== resetToValue;
 
     const onChange = (e, config) => {
         const activeConfig = config ?? _config;
@@ -98,6 +101,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
         value,
         error,
         dirty,
+        isDirty,
         onChange,
         onBlur,
         setValue: _handleSetValue,

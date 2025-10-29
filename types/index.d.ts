@@ -8,6 +8,7 @@ export declare interface Field {
     value: any,
     error: boolean,
     dirty: boolean,
+    isDirty: boolean,
     setValue: (v: any) => void,
     onChange: (v: any, config?: FieldConfig) => void,
     onBlur: (event: any, config?: FieldConfig) => void,
@@ -37,6 +38,8 @@ export declare function resetFields(fields: Fields): void;
 export declare function submitForm(fields: Fields, onSubmit: (values: object) => object | void): Promise<object> | object | undefined;
 
 export declare function cancelForm(fields: Fields, onCancel: () => void): void;
+
+export declare function isDirty(fields: Fields): boolean;
 
 export declare function noError(): true;
 
