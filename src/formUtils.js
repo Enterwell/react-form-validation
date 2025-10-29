@@ -76,7 +76,7 @@ export const validateFields = (fields) => {
  * @returns {boolean} true if any field is dirty, false otherwise
  */
 export const isDirty = (fields) => {
-    return Object.values(fields).some(field => field.isDirty);
+    return Object.values(fields).some(field => field.dirty);
 };
 
 /**

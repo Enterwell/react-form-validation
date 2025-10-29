@@ -36,7 +36,7 @@ describe('isDirty integration test - Complete workflow', () => {
                             >
                                 Save
                             </button>
-                            <p data-testid="hasChanges">{hasChanges.toString()}</p>
+                            <p data-testid="dirty">{hasChanges.toString()}</p>
                         </>
                     )}
                 </div>
@@ -51,21 +51,21 @@ describe('isDirty integration test - Complete workflow', () => {
         // After data loads, button should be disabled (no changes yet)
         cy.wait(150);
         cy.get('[data-testid="save"]').should('be.disabled');
-        cy.get('[data-testid="hasChanges"]').should('have.text', 'false');
+        cy.get('[data-testid="dirty"]').should('have.text', 'false');
 
         // After user makes a change, button should be enabled
         cy.get('[data-testid="name"]').clear().type('Jane Doe');
         cy.get('[data-testid="save"]').should('not.be.disabled');
-        cy.get('[data-testid="hasChanges"]').should('have.text', 'true');
+        cy.get('[data-testid="dirty"]').should('have.text', 'true');
 
         // After reverting to original value, button should be disabled again
         cy.get('[data-testid="name"]').clear().type('John Doe');
         cy.get('[data-testid="save"]').should('be.disabled');
-        cy.get('[data-testid="hasChanges"]').should('have.text', 'false');
+        cy.get('[data-testid="dirty"]').should('have.text', 'false');
 
         // Changing another field should enable the button
         cy.get('[data-testid="email"]').clear().type('jane@example.com');
         cy.get('[data-testid="save"]').should('not.be.disabled');
-        cy.get('[data-testid="hasChanges"]').should('have.text', 'true');
+        cy.get('[data-testid="dirty"]').should('have.text', 'true');
     });
 });

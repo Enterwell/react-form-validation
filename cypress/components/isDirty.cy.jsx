@@ -10,13 +10,13 @@ describe('isDirty functionality', () => {
                 
                 return (
                     <div>
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
         });
 
         it('should be true after onChange', () => {
@@ -26,15 +26,15 @@ describe('isDirty functionality', () => {
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
             cy.get('[data-testid="input"]').clear().type('changed');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'true');
+            cy.get('[data-testid="dirty"]').should('have.text', 'true');
         });
 
         it('should be false after onChange back to initial value', () => {
@@ -44,17 +44,17 @@ describe('isDirty functionality', () => {
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
             cy.get('[data-testid="input"]').clear().type('changed');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'true');
+            cy.get('[data-testid="dirty"]').should('have.text', 'true');
             cy.get('[data-testid="input"]').clear().type('initial');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
         });
 
         it('should remain false after setValue', () => {
@@ -72,17 +72,17 @@ describe('isDirty functionality', () => {
                     <div>
                         <input data-testid="input" {...field.props} />
                         <button data-testid="button" onClick={() => setClicked(true)}>Set Value</button>
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                         <p data-testid="value">{field.value}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
             cy.get('[data-testid="button"]').click();
             cy.get('[data-testid="value"]').should('have.text', 'newInitial');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
         });
 
         it('should be true after setValue then onChange', () => {
@@ -100,16 +100,16 @@ describe('isDirty functionality', () => {
                     <div>
                         <input data-testid="input" {...field.props} />
                         <button data-testid="button" onClick={() => setClicked(true)}>Set Value</button>
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
             cy.get('[data-testid="button"]').click();
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
             cy.get('[data-testid="input"]').clear().type('changed');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'true');
+            cy.get('[data-testid="dirty"]').should('have.text', 'true');
         });
 
         it('should be false after reset', () => {
@@ -120,16 +120,16 @@ describe('isDirty functionality', () => {
                     <div>
                         <input data-testid="input" {...field.props} />
                         <button data-testid="reset" onClick={() => field.reset()}>Reset</button>
-                        <p data-testid="isDirty">{field.isDirty.toString()}</p>
+                        <p data-testid="dirty">{field.dirty.toString()}</p>
                     </div>
                 );
             };
 
             mount(<Component />);
             cy.get('[data-testid="input"]').clear().type('changed');
-            cy.get('[data-testid="isDirty"]').should('have.text', 'true');
+            cy.get('[data-testid="dirty"]').should('have.text', 'true');
             cy.get('[data-testid="reset"]').click();
-            cy.get('[data-testid="isDirty"]').should('have.text', 'false');
+            cy.get('[data-testid="dirty"]').should('have.text', 'false');
         });
     });
 

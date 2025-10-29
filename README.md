@@ -15,8 +15,7 @@
 
 * Keeps form's state and validation results
 * Supports any kind of validation functions
-* Dirty checking (tracks both user interactions and value changes from initial state)
-* Track changes from initial values with `isDirty`
+* Dirty checking (tracks value changes from initial state)
 * Separates data from view
 * Relies on hooks, but can easily be used with class components
 
@@ -88,7 +87,7 @@ Hook that keeps on form field's data.
 
 | Type <div style="width: 200px"></div> | Description |
 |---- | ----------- |
-| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;dirty: boolean,<br>&nbsp;&nbsp;&nbsp;isDirty: boolean,<br>&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;setValue: (value: any) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config?) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void,<br>&nbsp;&nbsp;&nbsp;props: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;}<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`dirty` - indicates whether value of field was changed by user (used internally for validation timing)</li><li>`isDirty` - indicates whether current value differs from initial value (useful for enabling Save buttons)</li><li>`onChange` - callback for change event (changes the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`setValue` - function for setting the internal value (does not validate the input, enabling support for async data loading; also updates the initial value so `isDirty` remains `false`)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li><li>`props` - set of props that can be spread on standard input elements (same as props in root object, just grouped for better DX)</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
+| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;dirty: boolean,<br>&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;setValue: (value: any) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config?) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void,<br>&nbsp;&nbsp;&nbsp;props: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;}<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`dirty` - indicates whether current value differs from initial value (useful for enabling Save buttons and tracking changes)</li><li>`onChange` - callback for change event (changes the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`setValue` - function for setting the internal value (does not validate the input, enabling support for async data loading; also updates the initial value so `dirty` remains `false`)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li><li>`props` - set of props that can be spread on standard input elements (same as props in root object, just grouped for better DX)</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
 
 #### Usage example
 
@@ -272,7 +271,7 @@ Util function for checking if any field in a form has been changed from its init
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
 | ---- | ---- | ---- | ----------- |
-| fields | _{<br/>&nbsp;&nbsp;key: { isDirty: boolean },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `isDirty` property - other properties are not important) |
+| fields | _{<br/>&nbsp;&nbsp;key: { dirty: boolean },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `dirty` property - other properties are not important) |
 
 #### Returns
 
