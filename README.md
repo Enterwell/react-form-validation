@@ -15,7 +15,8 @@
 
 * Keeps form's state and validation results
 * Supports any kind of validation functions
-* Dirty checking
+* Dirty checking (both user interaction and value change tracking)
+* Track changes from initial values with `isDirty`
 * Separates data from view
 * Relies on hooks, but can easily be used with class components
 
@@ -87,7 +88,7 @@ Hook that keeps on form field's data.
 
 | Type <div style="width: 200px"></div> | Description |
 |---- | ----------- |
-| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;dirty: boolean,<br>&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;setValue: (value: any) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config?) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void,<br>&nbsp;&nbsp;&nbsp;props: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;}<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`onChange` - callback for change event (changes the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`setValue` - function for setting the internal value (does not validate the input, enabling support for async data loading)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li><li>`dirty` - indicates whether value of field was changed from initial value</li><li>`props` - set of props that can be spread on standard input elements (same as props in root object, just grouped for better DX)</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
+| _{<br>&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;error: boolean<br>&nbsp;&nbsp;&nbsp;dirty: boolean,<br>&nbsp;&nbsp;&nbsp;isDirty: boolean,<br>&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;setValue: (value: any) => void<br>&nbsp;&nbsp;&nbsp;validate: (any, config?) => boolean or Promise&lt;boolean&gt;<br>&nbsp;&nbsp;&nbsp;reset: () => void,<br>&nbsp;&nbsp;&nbsp;props: {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: any,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onChange: (any, config?) => void<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onBlur: (event, config?) => void<br>&nbsp;&nbsp;&nbsp;}<br>}_ | Object with field's data and callbacks.<br><br><ul><li>`value` - field's current value</li><li>`error` - is error present flag (`true` if value was validated and didn't pass validation, `false` otherwise)</li><li>`dirty` - indicates whether value of field was changed by user (used internally for validation timing)</li><li>`isDirty` - indicates whether current value differs from initial value (useful for enabling Save buttons)</li><li>`onChange` - callback for change event (changes the value and validates it if previous value wasn't correct)</li><li>`onBlur` - callback for blur event (validates the value)</li><li>`setValue` - function for setting the internal value (does not validate the input, enabling support for async data loading; also updates the initial value so `isDirty` remains `false`)</li><li>`validate` - function for validating field's value</li><li>`reset` - function for resetting field's data</li><li>`props` - set of props that can be spread on standard input elements (same as props in root object, just grouped for better DX)</li></ul><br/>`onChange`, `onBlur` and `validate` functions accept config as last parameter - this will override config from `useValidation` if provided. |
 
 #### Usage example
 
@@ -261,6 +262,55 @@ import { ..., cancelForm } from '@enterwell/react-form-validation';
 
 const onCancel = (data) => alert("Form has been reset");
 cancelForm(userFormData, onCancel);
+```
+
+### `isDirty(fields)`
+
+Util function for checking if any field in a form has been changed from its initial value. This is useful for enabling/disabling Save buttons based on whether the user has made any changes.
+
+#### Params
+
+| Name | Type <div style="width: 200px"></div> | Required | Description |
+| ---- | ---- | ---- | ----------- |
+| fields | _{<br/>&nbsp;&nbsp;key: { isDirty: boolean },<br/>&nbsp;&nbsp;...<br/>}_ | yes | Form field's data (each field must have `isDirty` property - other properties are not important) |
+
+#### Returns
+
+| Type <div style="width: 200px"></div> | Description |
+|---- | ----------- |
+| _boolean_ | `true` if any field has been changed from its initial value, `false` otherwise |
+
+#### Usage example
+
+```jsx
+import { ..., isDirty } from '@enterwell/react-form-validation';
+
+/* useValidation example's code... */
+
+const formData = {
+    name: useValidation('', isNonEmptyString),
+    email: useValidation('', isValidEmail)
+};
+
+// Load data from API
+useEffect(() => {
+    if (item) {
+        setValues(formData, {
+            name: item.name,
+            email: item.email
+        });
+    }
+}, [item]);
+
+// Check if form has changes
+const hasChanges = isDirty(formData);
+
+return (
+    <div>
+        {/* Form inputs */}
+        <button disabled={!hasChanges}>Save</button>
+    </div>
+);
 ```
 
 ___
