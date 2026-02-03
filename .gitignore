@@ -55,3 +55,4 @@ typings/
 # Dist and cypress folder
 dist
 cypress/videos
+cypress/screenshots

@@ -71,17 +71,20 @@ describe('formUtils', () => {
     it('validateFields_localValid', () => {
         const handleValidateFields = (r) => expect(r).eq(false);
         mount(<EmailComponentWithFields email={testEmailValid} emailValidation={isValidEmail} onValidateFields={handleValidateFields} />)
+        cy.get('#empty_id'); // wait for component to mount
     });
 
     it('validateFields_localInvalid', () => {
         const handleValidateFields = (r) => expect(r).eq(true);
         mount(<EmailComponentWithFields email={testEmailInvalid} emailValidation={isValidEmail} onValidateFields={handleValidateFields} />)
+        cy.get('#empty_id'); // wait for component to mount
     });
 
     it('validateFields_remoteValid', () => {
         let result = false;
         const handleValidateFields = (r) => result = r;
         mount(<EmailComponentWithFields email={testEmailValid} emailValidation={emailValidationRemote} onValidateFields={handleValidateFields} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(3000).then(() => {
             expect(result).to.be.false;
         });
@@ -91,6 +94,7 @@ describe('formUtils', () => {
         let result = false;
         const handleValidateFields = (r) => result = r;
         mount(<EmailComponentWithFields email={testEmailInvalid} emailValidation={emailValidationRemote} onValidateFields={handleValidateFields} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(3000).then(() => {
             expect(result).to.be.true;
         });
@@ -100,6 +104,7 @@ describe('formUtils', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
         mount(<EmailComponentWithSubmit email={testEmailValid} emailValidation={isValidEmail} onFormSubmit={handleFormSubmit} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(100).then(() => {
             expect(values).to.not.be.empty;
         });
@@ -109,6 +114,7 @@ describe('formUtils', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
         mount(<EmailComponentWithSubmit email={testEmailInvalid} emailValidation={isValidEmail} onFormSubmit={handleFormSubmit} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(100).then(() => {
             expect(values).to.be.empty;
         });
@@ -118,6 +124,7 @@ describe('formUtils', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
         mount(<EmailComponentWithSubmit email={testEmailValid} emailValidation={emailValidationRemote} onFormSubmit={handleFormSubmit} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(2000).then(() => {
             expect(values).to.not.be.empty;
         });
@@ -127,6 +134,7 @@ describe('formUtils', () => {
         let values = [];
         const handleFormSubmit = (r) => values = r;
         mount(<EmailComponentWithSubmit email={testEmailInvalid} emailValidation={emailValidationRemote} onFormSubmit={handleFormSubmit} />)
+        cy.get('#empty_id'); // wait for component to mount
         cy.wait(2000).then(() => {
             expect(values).to.be.empty;
         });
@@ -141,11 +149,11 @@ describe('formUtils', () => {
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
-            return (<div></div>);
+            return (<div id="empty_id"></div>);
         }
 
         mount(<Component />);
-
+        cy.get('#empty_id'); // wait for component to mount
         cy.then(() => {
             expect(result).to.eql(expectedResult);
         });
@@ -160,11 +168,12 @@ describe('formUtils', () => {
             useEffect(() => {
                 result = submitForm([email], () => expectedResult);
             }, []);
-            return (<div></div>);
+            return (<div id="empty_id"></div>);
         }
 
         mount(<Component />);
 
+        cy.get('#empty_id'); // wait for component to mount
         cy.then(() => {
             expect(result).to.be.undefined;
         });
@@ -179,11 +188,11 @@ describe('formUtils', () => {
             useEffect(() => {
                 submitForm([email], () => expectedResult).then(r => result = r);
             }, []);
-            return (<div></div>);
+            return (<div id="empty_id"></div>);
         }
 
         mount(<Component />);
-
+        cy.get('#empty_id'); // wait
         cy.wait(2000).then(() => {
             expect(result).to.eql(expectedResult);
         });

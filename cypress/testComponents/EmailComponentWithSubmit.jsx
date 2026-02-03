@@ -8,7 +8,7 @@ const EmailComponentWithSubmit = (props) => {
         submitForm([email], props.onFormSubmit)
     }, []);
 
-    return (<div></div>);
+    return (<div id="empty_id"></div>);
 }
 
 export default EmailComponentWithSubmit;

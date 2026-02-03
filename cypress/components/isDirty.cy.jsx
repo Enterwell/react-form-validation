@@ -145,11 +145,12 @@ describe('isDirty functionality', () => {
                     result = isDirty({ email, name });
                 }, []);
 
-                return <div></div>;
+                return <div id="empty_id"></div>;
             };
 
             mount(<Component />);
 
+            cy.get('#empty_id'); // wait for component to mount
             cy.then(() => {
                 expect(result).to.be.false;
             });
