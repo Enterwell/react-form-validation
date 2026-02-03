@@ -224,7 +224,6 @@ describe('isDirty functionality', () => {
             const Component = () => {
                 const email = useValidation('', isNonEmptyString);
                 const name = useValidation('', isNonEmptyString);
-                const [loaded, setLoaded] = useState(false);
                 const [changed, setChanged] = useState(false);
                 
                 useEffect(() => {
