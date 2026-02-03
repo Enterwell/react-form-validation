@@ -13,9 +13,9 @@
         "url": "https://enterwell.net"
     },
     "engines": {
-        "node": ">=18"
+        "node": ">=22"
     },
-    "packageManager": "pnpm@9.9.0",
+    "packageManager": "pnpm@10.28.2",
     "scripts": {
         "build": "vite build",
         "test": "cross-env NODE_ENV=test cypress run --component",
@@ -35,15 +35,15 @@
     ],
     "devDependencies": {
         "@cypress/react18": "2.0.1",
-        "@types/react-dom": "18.3.0",
+        "@types/react-dom": "19.2.3",
         "@vitejs/plugin-react": "4.3.1",
-        "cross-env": "7.0.3",
+        "cross-env": "10.1.0",
         "cypress": "13.14.1",
-        "react": "18.3.1",
-        "react-dom": "18.3.1",
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
         "vite": "5.4.2"
     },
     "peerDependencies": {
-        "react": "^16.13.1 || ^17 || ^18"
+        "react": "^16.13.1 || ^17 || ^18 || ^19"
     }
 }
