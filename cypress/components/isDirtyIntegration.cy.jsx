@@ -21,7 +21,7 @@ describe('isDirty integration test - Complete workflow', () => {
                     });
                     setLoaded(true);
                 }, 100);
-            }, [formData]);
+            }, []);
 
             return (
                 <div>
