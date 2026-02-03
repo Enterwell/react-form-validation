@@ -6,10 +6,9 @@ describe('isDirty integration test - Complete workflow', () => {
     it('should demonstrate Save button enable/disable with isDirty', () => {
         const Component = () => {
             const [loaded, setLoaded] = useState(false);
-            const [formData] = useState(() => ({
-                name: useValidation('', isNonEmptyString),
-                email: useValidation('', isValidEmail)
-            }));
+            const name = useValidation('', isNonEmptyString);
+            const email = useValidation('', isValidEmail);
+            const formData = { name, email };
             
             const hasChanges = isDirty(formData);
 
