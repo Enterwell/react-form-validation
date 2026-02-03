@@ -8,12 +8,12 @@ const EmailComponentWithFields = (props) => {
         var validationResult = validateFields({ email });
         if (typeof validationResult === "boolean") {
             props.onValidateFields(validationResult);
-        } else  {
+        } else {
             validationResult.then(r => props.onValidateFields(r));
         }
     }, []);
 
-    return (<div></div>);
+    return (<div id="empty_id"></div>);
 }
 
 export default EmailComponentWithFields;

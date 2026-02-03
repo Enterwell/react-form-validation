@@ -2,8 +2,6 @@
 logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Runtime data
 pids
@@ -51,12 +49,10 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# Yarn Integrity file
-.yarn-integrity
-
 # dotenv environment variables file
 .env
 
 # Dist and cypress folder
 dist
 cypress/videos
+cypress/screenshots
