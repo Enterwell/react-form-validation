@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from 'cypress/react';
 import { useValidation, isDirty, setValues, isNonEmptyString } from '../../src';
 
 describe('isDirty functionality', () => {
@@ -149,6 +149,7 @@ describe('isDirty functionality', () => {
             };
 
             mount(<Component />);
+
             cy.then(() => {
                 expect(result).to.be.false;
             });

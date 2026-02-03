@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from 'cypress/react';
 import { useValidation, isDirty, setValues, isNonEmptyString, isValidEmail } from '../../src';
 
 describe('isDirty integration test - Complete workflow', () => {
@@ -9,7 +9,7 @@ describe('isDirty integration test - Complete workflow', () => {
             const name = useValidation('', isNonEmptyString);
             const email = useValidation('', isValidEmail);
             const formData = { name, email };
-            
+
             const hasChanges = isDirty(formData);
 
             // Simulate loading data from an API
@@ -29,8 +29,8 @@ describe('isDirty integration test - Complete workflow', () => {
                         <>
                             <input data-testid="name" {...formData.name.props} />
                             <input data-testid="email" {...formData.email.props} />
-                            <button 
-                                data-testid="save" 
+                            <button
+                                data-testid="save"
                                 disabled={!hasChanges}
                             >
                                 Save

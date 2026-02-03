@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from 'cypress/react';
 import { isValidEmail } from '../../src';
 import EmailComponentWithFields from '../testComponents/EmailComponentWithFields.jsx';
 import EmailComponentWithLocalValidation from '../testComponents/EmailComponentWithLocalValidation.jsx';
@@ -50,7 +50,7 @@ describe('useValidation', () => {
                 if (email.value) {
                     email.validate(email.value);
                 }
-             }, []);
+            }, []);
 
             return (
                 <div>
