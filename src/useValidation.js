@@ -81,7 +81,7 @@ export const useValidation = (defaultValue, validationFn, config) => {
     };
 
     const reset = () => {
-        setValue(defaultValue);
+        setValue(resetToValue);
         setError(false);
     };
 
