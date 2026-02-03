@@ -267,6 +267,7 @@ cancelForm(userFormData, onCancel);
 
 Util function for checking if any field in a form has been changed from its initial value. This is useful for enabling/disabling Save buttons based on whether the user has made any changes.
 
+> **Note:** The dirty flag is determined using strict equality (`===`). For complex data types like objects or arrays, only changes to the reference will be detected—not changes to their internal structure. If you mutate an object or array in place, the dirty flag may not update as expected. This is similar to the limitation described for the `areEqual` validation function.
 #### Params
 
 | Name | Type <div style="width: 200px"></div> | Required | Description |
