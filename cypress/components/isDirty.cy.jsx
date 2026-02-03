@@ -7,7 +7,7 @@ describe('isDirty functionality', () => {
         it('should be false initially', () => {
             const Component = () => {
                 const field = useValidation('initial', isNonEmptyString);
-                
+
                 return (
                     <div>
                         <p data-testid="dirty">{field.dirty.toString()}</p>
@@ -22,7 +22,7 @@ describe('isDirty functionality', () => {
         it('should be true after onChange', () => {
             const Component = () => {
                 const field = useValidation('initial', isNonEmptyString);
-                
+
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
@@ -40,7 +40,7 @@ describe('isDirty functionality', () => {
         it('should be false after onChange back to initial value', () => {
             const Component = () => {
                 const field = useValidation('initial', isNonEmptyString);
-                
+
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
@@ -61,13 +61,13 @@ describe('isDirty functionality', () => {
             const Component = () => {
                 const field = useValidation('', isNonEmptyString);
                 const [clicked, setClicked] = useState(false);
-                
+
                 useEffect(() => {
                     if (clicked) {
                         field.setValue('newInitial');
                     }
                 }, [clicked]);
-                
+
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
@@ -89,13 +89,13 @@ describe('isDirty functionality', () => {
             const Component = () => {
                 const field = useValidation('', isNonEmptyString);
                 const [clicked, setClicked] = useState(false);
-                
+
                 useEffect(() => {
                     if (clicked) {
                         field.setValue('newInitial');
                     }
                 }, [clicked]);
-                
+
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
@@ -115,7 +115,7 @@ describe('isDirty functionality', () => {
         it('should be false after reset', () => {
             const Component = () => {
                 const field = useValidation('initial', isNonEmptyString);
-                
+
                 return (
                     <div>
                         <input data-testid="input" {...field.props} />
@@ -140,11 +140,11 @@ describe('isDirty functionality', () => {
             const Component = () => {
                 const email = useValidation('initial@test.com', isNonEmptyString);
                 const name = useValidation('Initial Name', isNonEmptyString);
-                
+
                 useEffect(() => {
                     result = isDirty({ email, name });
                 }, []);
-                
+
                 return <div></div>;
             };
 
@@ -161,13 +161,13 @@ describe('isDirty functionality', () => {
                 const email = useValidation('initial@test.com', isNonEmptyString);
                 const name = useValidation('Initial Name', isNonEmptyString);
                 const [changed, setChanged] = useState(false);
-                
+
                 useEffect(() => {
                     if (changed) {
                         result = isDirty({ email, name });
                     }
                 }, [changed]);
-                
+
                 return (
                     <div>
                         <input data-testid="email" {...email.props} />
@@ -193,7 +193,7 @@ describe('isDirty functionality', () => {
                 const email = useValidation('', isNonEmptyString);
                 const name = useValidation('', isNonEmptyString);
                 const [loaded, setLoaded] = useState(false);
-                
+
                 useEffect(() => {
                     // Simulate loading data from API
                     setValues({ email, name }, {
@@ -208,7 +208,7 @@ describe('isDirty functionality', () => {
                         result = isDirty({ email, name });
                     }
                 }, [loaded]);
-                
+
                 return <div></div>;
             };
 
@@ -225,14 +225,13 @@ describe('isDirty functionality', () => {
                 const email = useValidation('', isNonEmptyString);
                 const name = useValidation('', isNonEmptyString);
                 const [changed, setChanged] = useState(false);
-                
+
                 useEffect(() => {
                     // Simulate loading data from API
                     setValues({ email, name }, {
                         email: 'loaded@test.com',
                         name: 'Loaded Name'
                     });
-                    setLoaded(true);
                 }, []);
 
                 useEffect(() => {
@@ -240,7 +239,7 @@ describe('isDirty functionality', () => {
                         result = isDirty({ email, name });
                     }
                 }, [changed]);
-                
+
                 return (
                     <div>
                         <input data-testid="email" {...email.props} />
