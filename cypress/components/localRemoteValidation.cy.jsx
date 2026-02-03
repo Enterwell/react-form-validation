@@ -50,7 +50,7 @@ describe('useValidation', () => {
                 if (email.value) {
                     email.validate(email.value);
                 }
-             }, [email]);
+             }, []);
 
             return (
                 <div>
@@ -176,8 +176,8 @@ describe('formUtils', () => {
 
         function Component() {
             const email = useValidation(testEmailValid, emailValidationRemote);
-            useEffect(async () => {
-                result = await submitForm([email], () => expectedResult);
+            useEffect(() => {
+                submitForm([email], () => expectedResult).then(r => result = r);
             }, []);
             return (<div></div>);
         }

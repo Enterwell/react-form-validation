@@ -7,7 +7,8 @@ export {
     setValues,
     resetFields, 
     submitForm, 
-    cancelForm 
+    cancelForm,
+    isDirty
 } from './formUtils';
 export {
     noError,

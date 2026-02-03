@@ -70,6 +70,16 @@ export const validateFields = (fields) => {
 };
 
 /**
+ * Checks if any of the form fields are dirty (have changed from initial values).
+ * 
+ * @param {Object.<string, Object>} fields Form's fields
+ * @returns {boolean} true if any field is dirty, false otherwise
+ */
+export const isDirty = (fields) => {
+    return Object.values(fields).some(field => field.dirty);
+};
+
+/**
  * Resets forms' fields to their initial values.
  * 
  * @param {Object.<string, Object>} fields Form's fields

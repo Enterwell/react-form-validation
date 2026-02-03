@@ -29,17 +29,14 @@ export const useValidation = (defaultValue, validationFn, config) => {
     const [resetToValue, setResetToValue] = useState(defaultValue);
     const [value, setValue] = useState(resetToValue);
     const [error, setError] = useState(false);
-    const [dirty, setDirty] = useState(false);
+    
+    // dirty compares current value with initial value
+    const dirty = value !== resetToValue;
 
     const onChange = (e, config) => {
         const activeConfig = config ?? _config;
         const v = activeConfig.receiveEvent ? e.target.value : e;
         setValue(v);
-
-        // Setting dirty flag indicates that value has been changed
-        if (!activeConfig.ignoreDirtiness && !dirty) {
-            setDirty(true);
-        }
 
         // Value is validated on change, only if previously was incorrect
         if (error) {
@@ -53,11 +50,6 @@ export const useValidation = (defaultValue, validationFn, config) => {
         // Value is validated if it is dirty or if dirtiness should be ignored
         if (activeConfig.ignoreDirtiness || dirty) {
             validate(value, activeConfig);
-        }
-
-        // Resets the dirty flag
-        if (!activeConfig.ignoreDirtiness && !dirty) {
-            setDirty(false);
         }
     };
 
@@ -89,9 +81,8 @@ export const useValidation = (defaultValue, validationFn, config) => {
     };
 
     const reset = () => {
-        setValue(defaultValue);
+        setValue(resetToValue);
         setError(false);
-        setDirty(false);
     };
 
     return {

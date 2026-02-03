@@ -38,6 +38,8 @@ export declare function submitForm(fields: Fields, onSubmit: (values: object) =>
 
 export declare function cancelForm(fields: Fields, onCancel: () => void): void;
 
+export declare function isDirty(fields: Fields): boolean;
+
 export declare function noError(): true;
 
 export declare function areEqual(v1: any, v2: any): boolean;
