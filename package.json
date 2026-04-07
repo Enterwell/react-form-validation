@@ -21,11 +21,10 @@
         "test": "cross-env NODE_ENV=test cypress run --component",
         "test:open": "cross-env NODE_ENV=test cypress open"
     },
-    "types": "./types/index.d.ts",
+    "types": "./dist/index.d.ts",
     "main": "./dist/index.js",
     "files": [
-        "dist",
-        "types"
+        "dist"
     ],
     "keywords": [
         "react",
@@ -41,7 +40,9 @@
         "cypress": "15.9.0",
         "react": "19.2.4",
         "react-dom": "19.2.4",
-        "vite": "7.3.1"
+        "typescript": "^6.0.2",
+        "vite": "7.3.1",
+        "vite-plugin-dts": "^4.5.4"
     },
     "peerDependencies": {
         "react": "^16.13.1 || ^17 || ^18 || ^19"
