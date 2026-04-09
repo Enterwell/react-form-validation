@@ -97,7 +97,7 @@ export const useValidation = <T = unknown>(
         setValue(v);
     };
 
-    const _setValidationResult = (isError: boolean, config?: FieldConfig): boolean => {
+    const _setValidationResult = (isError: boolean, config?: FieldConfig) => {
         const activeConfig = config ?? _config;
 
         // Applies the reverse logic if needed
@@ -106,7 +106,7 @@ export const useValidation = <T = unknown>(
         return _error;
     };
 
-    const validate = (v: T, config?: FieldConfig): boolean | Promise<boolean> => {
+    const validate = (v: T, config?: FieldConfig) => {
         // Validates the value
         const validationResult = validationFn(v);
         if (typeof validationResult === "boolean") {

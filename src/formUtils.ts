@@ -14,7 +14,7 @@ const isFunction = (f: unknown): f is Function => Object.prototype.toString.call
  * @param fields Form's fields
  * @returns object containing form fields' values
  */
-export const extractValues = (fields: Fields): Record<string, unknown> => {
+export const extractValues = (fields: Fields) => {
     return Object
         .entries(fields)
         .reduce<Record<string, unknown>>((acc, [k, v]) => ({ ...acc, [k]: v.value }), {});
@@ -27,7 +27,7 @@ export const extractValues = (fields: Fields): Record<string, unknown> => {
  * @param fields Form's fields
  * @param values Form's fields new values
  */
-export const setValues = (fields: Fields, values: Record<string, unknown>): void => {
+export const setValues = (fields: Fields, values: Record<string, unknown>) => {
     Object
         .entries(fields)
         .forEach(([k, v]) => {
@@ -44,7 +44,7 @@ export const setValues = (fields: Fields, values: Record<string, unknown>): void
  * @returns true if there is any error in the form, false otherwise.
  *          Promise with same result when at least one validation function resolved to Promise.
  */
-export const validateFields = (fields: Fields): boolean | Promise<boolean> => {
+export const validateFields = (fields: Fields) => {
     // Checks whether all fields have correct validation function
     Object
         .entries(fields)
@@ -77,7 +77,7 @@ export const validateFields = (fields: Fields): boolean | Promise<boolean> => {
  * @param fields Form's fields
  * @returns true if any field is dirty, false otherwise
  */
-export const isDirty = (fields: Fields): boolean => {
+export const isDirty = (fields: Fields) => {
     return Object.values(fields).some(field => field.dirty);
 };
 
@@ -86,7 +86,7 @@ export const isDirty = (fields: Fields): boolean => {
  *
  * @param fields Form's fields
  */
-export const resetFields = (fields: Fields): void => {
+export const resetFields = (fields: Fields) => {
     // Checks whether all fields have correct validation function
     Object
         .entries(fields)
@@ -111,7 +111,7 @@ export const resetFields = (fields: Fields): void => {
  *          wrapped in Promise if at least one validation function resolved to Promise.
  *          Returns undefined when form is not valid and onSubmit callback is not invoked or onSubmit function returns void.
  */
-export const submitForm = (fields: Fields, onSubmit: (values: Record<string, unknown>) => unknown): Promise<unknown> | unknown | undefined => {
+export const submitForm = (fields: Fields, onSubmit: (values: Record<string, unknown>) => unknown) => {
     const validationResultHasErrors = validateFields(fields);
     if (typeof validationResultHasErrors === "boolean") {
         if (validationResultHasErrors) {
@@ -135,7 +135,7 @@ export const submitForm = (fields: Fields, onSubmit: (values: Record<string, unk
  * @param fields Form's fields
  * @param onCancel On cancel callback
  */
-export const cancelForm = (fields: Fields, onCancel: () => void): void => {
+export const cancelForm = (fields: Fields, onCancel: () => void) => {
     resetFields(fields);
     onCancel();
 };
