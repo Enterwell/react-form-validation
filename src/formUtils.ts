@@ -1,7 +1,7 @@
 import type { Field, Fields } from './useValidation';
 
 type FieldCollection<TFields> = {
-    [K in keyof TFields]: TFields[K] extends Field<infer _TValue>
+    [K in keyof TFields]: TFields[K] extends Field<infer TValue>
         ? TFields[K]
         : never;
 };
