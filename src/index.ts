@@ -15,6 +15,9 @@ export {
     cancelForm,
     isDirty
 } from './formUtils';
+export type {
+    ExtractedValues
+} from './formUtils';
 export {
     noError,
     areEqual,
