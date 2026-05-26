@@ -1,18 +1,6 @@
 import type { Field, Fields } from './useValidation';
 
-type FieldCollection<TFields> = {
-    [K in keyof TFields]: TFields[K] extends Field<infer TValue>
-        ? TFields[K]
-        : never;
-};
-
-type FieldEntries<TFields extends FieldCollection<TFields>> = {
-    [K in keyof TFields]: TFields[K] extends Field<infer TValue>
-        ? [K, Field<TValue>]
-        : never;
-}[keyof TFields][];
-
-export type ExtractedValues<TFields extends FieldCollection<TFields>> = {
+export type ExtractedValues<TFields extends Record<string, Field>> = {
     [K in keyof TFields]: TFields[K] extends Field<infer TValue>
         ? TValue
         : never;
@@ -32,10 +20,9 @@ const isFunction = (f: unknown): f is Function => Object.prototype.toString.call
  * @param fields Form's fields
  * @returns object containing form fields' values
  */
-export const extractValues = <TFields extends FieldCollection<TFields>>(fields: TFields): ExtractedValues<TFields> => {
-    const fieldEntries = Object.entries(fields) as FieldEntries<TFields>;
-
-    return fieldEntries
+export const extractValues = <TFields extends Record<string, Field>>(fields: TFields): ExtractedValues<TFields> => {
+    return Object
+        .entries(fields)
         .reduce(
             (acc, [k, field]) => ({ ...acc, [k]: field.value }),
             {} as ExtractedValues<TFields>
@@ -133,7 +120,7 @@ export const resetFields = (fields: Fields) => {
  *          wrapped in Promise if at least one validation function resolved to Promise.
  *          Returns undefined when form is not valid and onSubmit callback is not invoked or onSubmit function returns void.
  */
-export const submitForm = <TFields extends FieldCollection<TFields>>(fields: TFields, onSubmit: (values: ExtractedValues<TFields>) => unknown) => {
+export const submitForm = <TFields extends Record<string, Field>>(fields: TFields, onSubmit: (values: ExtractedValues<TFields>) => unknown) => {
     const validationResultHasErrors = validateFields(fields);
     if (typeof validationResultHasErrors === "boolean") {
         if (validationResultHasErrors) {

@@ -16,11 +16,11 @@ export interface Field<T = unknown> {
     value: T;
     error: boolean;
     dirty: boolean;
-    setValue: (v: T) => void;
-    onChange: (e: unknown, config?: FieldConfig) => void;
-    onBlur: (event: unknown, config?: FieldConfig) => void;
-    validate: (v: T, config?: FieldConfig) => boolean | Promise<boolean>;
-    reset: () => void;
+    setValue(v: T): void;
+    onChange(e: unknown, config?: FieldConfig): void;
+    onBlur(event: unknown, config?: FieldConfig): void;
+    validate(v: T, config?: FieldConfig): boolean | Promise<boolean>;
+    reset(): void;
     props: {
         value: T;
         onChange: Field<T>['onChange'];
