@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Project converted to TypeScript
+- Package exports are now defined via the `exports` map, which changes the published package interface and is a breaking change for consumers relying on previous import paths
 
 ## [1.5.0] - 2024-09-03
 
