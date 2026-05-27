@@ -1,14 +1,22 @@
-export { 
+export {
     useValidation
 } from './useValidation';
-export { 
-    extractValues, 
-    validateFields, 
+export type {
+    FieldConfig,
+    Field,
+    Fields
+} from './useValidation';
+export {
+    extractValues,
+    validateFields,
     setValues,
-    resetFields, 
-    submitForm, 
+    resetFields,
+    submitForm,
     cancelForm,
     isDirty
+} from './formUtils';
+export type {
+    ExtractedValues
 } from './formUtils';
 export {
     noError,
