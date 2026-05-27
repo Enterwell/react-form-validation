@@ -25,10 +25,10 @@ export const areEqual = (v1: unknown, v2: unknown) => v1 === v2;
 export const isTrue = (v: unknown) => typeof v === "boolean" && v;
 
 /**
- * Checks if value is null.
+ * Checks if value is not null.
  *
  * @param v Value
- * @returns true if value is null (indicating that no error is present), false otherwise
+ * @returns true if value is not null (indicating that no error is present), false otherwise
  */
 export const isNotNull = (v: unknown) => v !== null;
 
