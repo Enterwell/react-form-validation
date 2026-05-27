@@ -9,11 +9,11 @@ importers:
   .:
     devDependencies:
       '@types/react':
-        specifier: 19.2.10
-        version: 19.2.10
+        specifier: 19.2.14
+        version: 19.2.14
       '@types/react-dom':
         specifier: 19.2.3
-        version: 19.2.3(@types/react@19.2.10)
+        version: 19.2.3(@types/react@19.2.14)
       '@vitejs/plugin-react':
         specifier: 5.1.3
         version: 5.1.3(vite@7.3.2(@types/node@25.2.0))
@@ -21,8 +21,8 @@ importers:
         specifier: 10.1.0
         version: 10.1.0
       cypress:
-        specifier: 15.9.0
-        version: 15.9.0
+        specifier: 15.13.0
+        version: 15.13.0
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -530,8 +530,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.0
 
-  '@types/react@19.2.10':
-    resolution: {integrity: sha512-WPigyYuGhgZ/cTPRXB2EwUw+XvsRA3GqHlsP4qteqrnnjDrApbS7MxcGr/hke5iUoeB7E/gQtrs9I37zAJ0Vjw==}
+  '@types/react@19.2.14':
+    resolution: {integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==}
 
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
@@ -793,8 +793,8 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
-  cypress@15.9.0:
-    resolution: {integrity: sha512-Ks6Bdilz3TtkLZtTQyqYaqtL/WT3X3APKaSLhTV96TmTyudzSjc6EJsJCHmBb7DxO+3R12q3Jkbjgm/iPgmwfg==}
+  cypress@15.13.0:
+    resolution: {integrity: sha512-hJ9sY++TUC/HlUzHVJpIrDyqKMjlhx5PTXl/A7eA91JNEtUWkJAqefQR5mo9AtLra/9+m+JJaMg2U5Qd0a74Fw==}
     engines: {node: ^20.1.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
 
@@ -1124,9 +1124,6 @@ packages:
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
-
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
@@ -1419,8 +1416,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  systeminformation@5.30.7:
-    resolution: {integrity: sha512-33B/cftpaWdpvH+Ho9U1b08ss8GQuLxrWHelbJT1yw4M48Taj8W3ezcPuaLoIHZz5V6tVHuQPr5BprEfnBLBMw==}
+  systeminformation@5.31.6:
+    resolution: {integrity: sha512-Uv2b2uGGM6ns+26czgW2cYRabYdnswM0ddSOOlryHOaelzsmDSet1iM/NT7VOYxW8x/BW+HkY+b1Ve2pLTSGSA==}
     engines: {node: '>=8.0.0'}
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
@@ -1453,6 +1450,9 @@ packages:
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
+
+  tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -1503,6 +1503,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   verror@1.10.0:
@@ -2021,11 +2022,11 @@ snapshots:
       undici-types: 7.16.0
     optional: true
 
-  '@types/react-dom@19.2.3(@types/react@19.2.10)':
+  '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
-      '@types/react': 19.2.10
+      '@types/react': 19.2.14
 
-  '@types/react@19.2.10':
+  '@types/react@19.2.14':
     dependencies:
       csstype: 3.2.3
 
@@ -2276,7 +2277,7 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  cypress@15.9.0:
+  cypress@15.13.0:
     dependencies:
       '@cypress/request': 3.0.10
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
@@ -2306,7 +2307,7 @@ snapshots:
       hasha: 5.2.2
       is-installed-globally: 0.4.0
       listr2: 3.14.0(enquirer@2.4.1)
-      lodash: 4.17.23
+      lodash: 4.18.1
       log-symbols: 4.1.0
       minimist: 1.2.8
       ospath: 1.2.2
@@ -2315,9 +2316,10 @@ snapshots:
       proxy-from-env: 1.0.0
       request-progress: 3.0.0
       supports-color: 8.1.1
-      systeminformation: 5.30.7
+      systeminformation: 5.31.6
       tmp: 0.2.5
       tree-kill: 1.2.2
+      tslib: 1.14.1
       untildify: 4.0.0
       yauzl: 2.10.0
 
@@ -2645,8 +2647,6 @@ snapshots:
 
   lodash.once@4.1.1: {}
 
-  lodash@4.17.23: {}
-
   lodash@4.18.1: {}
 
   log-symbols@4.1.0:
@@ -2950,7 +2950,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  systeminformation@5.30.7: {}
+  systeminformation@5.31.6: {}
 
   throttleit@1.0.1: {}
 
@@ -2974,6 +2974,8 @@ snapshots:
       tldts: 6.1.86
 
   tree-kill@1.2.2: {}
+
+  tslib@1.14.1: {}
 
   tslib@2.8.1: {}
 
