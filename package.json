@@ -22,7 +22,20 @@
         "test:open": "cross-env NODE_ENV=test cypress open"
     },
     "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.mjs"
+            },
+            "require": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.cjs"
+            }
+        }
+    },
     "files": [
         "dist"
     ],
