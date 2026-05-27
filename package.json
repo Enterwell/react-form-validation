@@ -1,6 +1,6 @@
 {
     "name": "@enterwell/react-form-validation",
-    "version": "1.6.0",
+    "version": "2.0.0",
     "description": "Form validation functionality for React components",
     "license": "MIT",
     "repository": {
