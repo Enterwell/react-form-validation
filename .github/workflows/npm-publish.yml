@@ -6,6 +6,7 @@ name: Build and publish
 on:
   push:
     branches:
+      - stage
       - master
     paths:
       - "src/**"
@@ -23,6 +24,13 @@ jobs:
         run: corepack enable
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm publish
+      - name: Publish package
+        if: github.ref == 'refs/heads/master'
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish release candidate package
+        if: github.ref == 'refs/heads/stage'
+        run: pnpm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
