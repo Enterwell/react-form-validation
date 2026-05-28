@@ -9,7 +9,7 @@ on:
       - master
     paths:
       - "src/**"
-
+  workflow_dispatch:
 jobs:
   buildAndPublish:
     runs-on: ubuntu-latest
