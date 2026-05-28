@@ -10,6 +10,11 @@ on:
     paths:
       - "src/**"
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   buildAndPublish:
     runs-on: ubuntu-latest
