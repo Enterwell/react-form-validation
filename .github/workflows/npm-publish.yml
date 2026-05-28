@@ -6,6 +6,7 @@ name: Build and publish
 on:
   push:
     branches:
+      - stage
       - master
     paths:
       - "src/**"
@@ -23,6 +24,18 @@ jobs:
         run: corepack enable
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm publish
+      - name: Publish package
+        if: github.ref == 'refs/heads/master'
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Set release candidate version
+        if: github.ref == 'refs/heads/stage'
+        run: |
+          RC_VERSION="$(node -p 'const { version } = require("./package.json"); const [base] = version.split("-"); `${base}-rc.${process.env.GITHUB_RUN_NUMBER}.${process.env.GITHUB_RUN_ATTEMPT}`')"
+          pnpm version "$RC_VERSION" --no-git-tag-version
+      - name: Publish release candidate package
+        if: github.ref == 'refs/heads/stage'
+        run: pnpm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
