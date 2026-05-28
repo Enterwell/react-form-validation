@@ -5,8 +5,8 @@ import EmailComponentWithFields from '../testComponents/EmailComponentWithFields
 import EmailComponentWithLocalValidation from '../testComponents/EmailComponentWithLocalValidation.jsx';
 import EmailComponentWithRemoteValidation from '../testComponents/EmailComponentWithRemoteValidation.jsx';
 import EmailComponentWithSubmit from '../testComponents/EmailComponentWithSubmit.jsx';
-import { submitForm } from '../../src/formUtils.js';
-import { useValidation } from '../../src/useValidation.js';
+import { submitForm } from '../../src/formUtils';
+import { useValidation } from '../../src/useValidation';
 
 const emailValidationRemote = (value) => new Promise((resolve) => setTimeout(() => resolve(isValidEmail(value)), 2000));
 const testEmailValid = "matej.radovix@enterwell.net";
