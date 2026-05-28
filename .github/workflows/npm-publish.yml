@@ -23,4 +23,4 @@ jobs:
         run: corepack enable
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm publish
+      - run: pnpm publish --access public
